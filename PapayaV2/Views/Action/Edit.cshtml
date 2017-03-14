@@ -1,0 +1,97 @@
+﻿@model PapayaX2.Database.rs_action
+
+@{
+    ViewBag.Title = ViewBag.ModuleName + " - Edit";
+}
+
+<h2>@ViewBag.ModuleName - Edit</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        @Html.HiddenFor(model => model.ActionId)
+        @Html.HiddenFor(model => model.DateEntry)
+        @Html.HiddenFor(model => model.UserEntry)
+
+        @Html.Raw(ViewBag.Notification)
+
+        <div class="editor-label">
+            Module Name
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ModuleId", "Select Module")
+            @Html.ValidationMessageFor(model => model.ModuleId)
+        </div>
+
+        <div class="editor-label">
+            Action Name
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            Active @ViewBag.ModuleName? :
+            @Html.EditorFor(model => model.FlagActive) Yes
+            @Html.ValidationMessageFor(model => model.FlagActive)
+        </div>
+
+        <div style="margin:20px auto">
+            <input type="submit" value="Save" style="float:left" />
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "others", style = "float:left" })
+        </div>
+    </fieldset>
+}
+
+@{
+    ViewBag.Title = ViewBag.ModuleName + " - Edit";
+}
+
+<h2>@ViewBag.ModuleName - Edit</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        @Html.HiddenFor(model => model.ActionId)
+        @Html.HiddenFor(model => model.DateEntry)
+        @Html.HiddenFor(model => model.UserEntry)
+
+        @Html.Raw(ViewBag.Notification)
+
+        <div class="editor-label">
+            Module Name
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ModuleId", "Select Module")
+            @Html.ValidationMessageFor(model => model.ModuleId)
+        </div>
+
+        <div class="editor-label">
+            Action Name
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            Active @ViewBag.ModuleName? :
+            @Html.EditorFor(model => model.FlagActive) Yes
+            @Html.ValidationMessageFor(model => model.FlagActive)
+        </div>
+
+        <div style="margin:20px auto">
+            <input type="submit" value="Save" style="float:left" />
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "others", style = "float:left" })
+        </div>
+    </fieldset>
+}

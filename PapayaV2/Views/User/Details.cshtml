@@ -1,0 +1,67 @@
+﻿@model PapayaX2.Database.rs_user
+
+@{
+    ViewBag.Title = ViewBag.ModuleName + " - Details";
+}
+
+<h2>@ViewBag.ModuleName - Details</h2>
+
+@if(TempData["Notification"] != null)
+{
+    @Html.Raw(TempData["Notification"].ToString());
+}
+
+<fieldset>
+    <br />
+    <table class="others">
+        <tr>
+            <td class="other">Username</td>
+            <td>@Html.DisplayFor(model => model.Username)</td>
+        </tr>
+        <tr>
+            <td class="other">Full Name</td>
+            <td>@Html.DisplayFor(model => model.FullName)</td>
+        </tr>
+        @*<tr>
+            <td class="other">Mobile Number</td>
+            <td>
+               <a href="skype:@Html.DisplayFor(model => model.MobileNumber)?call">
+                    <img src="@Url.Content("~/Content/Images/phone-green.png")" width="14px" height="14px" /> 
+                    @Html.DisplayFor(model => model.MobileNumber)
+               </a>
+            </td>
+        </tr>
+        <tr>
+            <td class="other">Email</td>
+            <td>@Html.DisplayFor(model => model.Email)</td>
+        </tr>*@
+         <tr>
+            <td class="other">Group</td>
+            <td>@Html.DisplayFor(model => model.rs_user_group.Name)</td>
+        </tr>
+        <tr>
+            <td class="other">Active User?</td>
+            <td>@Html.DisplayFor(model => model.FlagActive) Yes</td>
+        </tr>
+        <tr>
+            <td class="other">Date Entry</td>
+            <td>@Html.DisplayFor(model => model.DateEntry)</td>
+        </tr>
+        <tr>
+            <td class="other">User Entry</td>
+            <td>@Html.DisplayFor(model => model.UserEntry)</td>
+        </tr>
+        <tr>
+            <td class="other">Last Update On</td>
+            <td>@Html.DisplayFor(model => model.DateUpdate)</td>
+        </tr>
+        <tr>
+            <td class="other">Last Update By</td>
+            <td>@Html.DisplayFor(model => model.UserUpdate)</td>
+        </tr>
+    </table>
+</fieldset>
+<div style="margin:20px auto">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }, new { @class = "others", style = "float:left" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "others", style="float:left" })
+</div>

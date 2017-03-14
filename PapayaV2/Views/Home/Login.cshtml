@@ -1,0 +1,32 @@
+﻿@model PapayaX2.Models.LoginModel
+@{
+    ViewBag.Title = "Papaya - Login";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="mdl-card__actions mdl-card--border">
+        <form>
+            <ul>
+                <li>
+                    <img src="~/Content/Images/pictureplaceholder.png" alt="profile-picture-placeholder" class="profile-ph">
+                </li>
+                <li>
+                    @Html.TextBoxFor(m => m.Username, new { Class = "uwrpwd", name = "Username", placeholder = "Enter your username" })
+                </li>
+                <li>
+                    @Html.PasswordFor(m => m.Password, new { Class = "uwrpwd", name = "Password", placeholder = "Password" })
+                </li>
+                <li>
+                    <button type="submit" value="Login" class="login-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                        Login
+                    </button>
+                </li>
+                <li style="text-align: right; padding-right: 10px;">
+                    Forgot password?
+                </li>
+            </ul>
+        </form>
+    </div>
+}

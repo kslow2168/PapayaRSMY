@@ -1,0 +1,79 @@
+﻿@model PapayaX2.Database.rs_user
+
+@{
+    ViewBag.Title = ViewBag.ModuleName + " - Reset Password";
+}
+
+<h2>@ViewBag.ModuleName - Reset Password</h2>
+
+@if(TempData["Notification"] != null)
+{
+    @Html.Raw(TempData["Notification"].ToString());
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Reset Password for username "@Model.Username"</legend>
+        <br />
+        @Html.HiddenFor(model => model.UserId)
+
+        <table class="others">
+            <tr>
+                <td class="other">Username</td>
+                <td>
+                    @Html.HiddenFor(model => model.Username)
+                    @Html.DisplayFor(model => model.Username)
+                </td>
+            </tr>
+            <tr>
+                <td class="other">Full Name</td>
+                <td>
+                    @Html.HiddenFor(model => model.FullName)
+                    @Html.DisplayFor(model => model.FullName)
+                </td>
+            </tr>
+            @*<tr>
+                <td class="other">Mobile Number</td>
+                <td>
+                    @Html.HiddenFor(model => model.MobileNumber)
+                    @Html.DisplayFor(model => model.MobileNumber)
+                </td>
+            </tr>
+            <tr>
+                <td class="other">Email</td>
+                <td>
+                    @Html.HiddenFor(model => model.Email)
+                    @Html.DisplayFor(model => model.Email)
+                </td>
+            </tr>*@
+            <tr>
+                <td class="other">Group</td>
+                <td>
+                    @Html.HiddenFor(model => model.GroupId)
+                    @Html.DisplayFor(model => model.rs_user_group.Name)
+                </td>
+            </tr>
+            <tr>
+                <td class="other">Active User?</td>
+                <td>
+                    @Html.HiddenFor(model => model.FlagActive)
+                    @Html.DisplayFor(model => model.FlagActive) Yes
+                </td>
+            </tr>
+        </table>
+
+            @Html.HiddenFor(model => model.UserEntry)
+            @Html.HiddenFor(model => model.DateEntry)
+            @Html.HiddenFor(model => model.UserUpdate)
+            @Html.HiddenFor(model => model.DateUpdate)
+
+        <div style="margin:20px auto">
+            <input type="submit" value="Reset Password to '123456'" style="float:left;width:200px" />
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "others", style="float:left" })
+        </div>
+    </fieldset>
+}

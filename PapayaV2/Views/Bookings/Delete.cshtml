@@ -1,0 +1,192 @@
+﻿@model PapayaX2.Database.rs_bookings
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>rs_bookings</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ExtendedDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ExtendedDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Extended)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Extended)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Approved)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Approved)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.BookAt)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.BookAt)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.UpdatedAt)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.UpdatedAt)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Remarks)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Remarks)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Purpose)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Purpose)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Returned)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Returned)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ReturnDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ReturnDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.LoanLocationId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LoanLocationId)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ReturnLocationId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ReturnLocationId)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Damaged)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Damaged)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.rs_assets.Brand)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.rs_assets.Brand)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.rs_loan_form.Company)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.rs_loan_form.Company)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.rs_user.Username)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.rs_user.Username)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.rs_user1.Username)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.rs_user1.Username)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.rs_user2.Username)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.rs_user2.Username)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.rs_user3.Username)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.rs_user3.Username)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

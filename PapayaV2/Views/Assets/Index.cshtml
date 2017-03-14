@@ -1,0 +1,112 @@
+﻿@model IEnumerable<PapayaX2.Database.rs_assets>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#search").DefaultValue("Search");
+    });
+
+</script>
+
+
+@{
+    ViewBag.Title = "Assets Inventory List";
+}
+
+@if (TempData["Notification"] != null)
+{
+    @Html.Raw(TempData["Notification"].ToString());
+}
+
+<h2>Assets Inventory List</h2>
+
+
+<div>
+    <div style="float:left">
+        @Html.ActionLink(" ", "Create", null, new { @class = "Create", title = "Create Asset" })
+        @Html.ActionLink(" ", "Download", null, new { @class = "download", title = "Download" })
+        @Html.ActionLink(" ", "DownloadTemplate", null, new { @class = "template", title = "Download Template" })
+    </div>
+    <li id="searchbox">
+        @using (Html.BeginForm(null, null, FormMethod.Get))
+            {
+            <div class="searchbox">
+                @Html.TextBox("search", (string)ViewBag.search, new { id = "search", placeholder = "For multiple search please add \"@\" between the keywords", style = "width:350px" })
+                <input type="submit" value="Search" />
+            </div>
+        }
+    </li>
+    <br />
+
+</div>
+
+<div class="pages" style="float:right">
+    @Html.Raw(ViewBag.Pagination)
+    <br />
+
+</div>
+
+    <table class="index">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Desciption)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SerialNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrackingNo)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Desciption)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaterialNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrackingNo)
+            </td>
+            
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.AssetId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.AssetId }) |
+                @{
+                    if (item.IsSystem)
+                    {
+                        @Html.ActionLink("Book", "BookSystem", "Bookings", new { SystemId = item.AssetId }, null)
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Book", "Book", "Bookings", new { AssetId = item.AssetId }, null)
+                    }
+                }
+                 |
+                @Html.ActionLink("Delete", "Delete", new { id=item.AssetId })
+            </td>
+        </tr>
+    }
+    
+    </table>
+

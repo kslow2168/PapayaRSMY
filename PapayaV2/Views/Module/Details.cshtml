@@ -1,0 +1,64 @@
+﻿@model PapayaX2.Database.rs_module
+
+@{
+    ViewBag.Title = ViewBag.ModuleName + " - Details";
+}
+
+
+    <h2>@ViewBag.ModuleName - Details</h2>
+
+    @if (TempData["Notification"] != null)
+    {
+        @Html.Raw(TempData["Notification"].ToString());
+    }
+
+    <fieldset>
+        <br />
+        <table class="others">
+            <tr>
+                <td class="other">Module Name</td>
+                <td>@Html.DisplayFor(model => model.Name)</td>
+            </tr>
+            <tr>
+                <td class="other">Parent Module</td>
+                <td>@Html.DisplayFor(model => model.rs_module2.Name)</td>
+            </tr>
+            <tr>
+                <td class="other">Controller</td>
+                <td>@Html.DisplayFor(model => model.Controller)</td>
+            </tr>
+            <tr>
+                <td class="other">Module Order</td>
+                <td>@Html.DisplayFor(model => model.ModuleOrder)</td>
+            </tr>
+            <tr>
+                <td class="other">Backend Module?</td>
+                <td>@Html.DisplayFor(model => model.IsBackEnd) Yes</td>
+            </tr>
+            <tr>
+                <td class="other">Active Module?</td>
+                <td>@Html.DisplayFor(model => model.FlagActive) Yes</td>
+            </tr>
+            <tr>
+                <td class="other">Date Entry</td>
+                <td>@Html.DisplayFor(model => model.DateEntry)</td>
+            </tr>
+            <tr>
+                <td class="other">User Entry</td>
+                <td>@Html.DisplayFor(model => model.UserEntry)</td>
+            </tr>
+            <tr>
+                <td class="other">Last Update On</td>
+                <td>@Html.DisplayFor(model => model.DateUpdate)</td>
+            </tr>
+            <tr>
+                <td class="other">Last Update By</td>
+                <td>@Html.DisplayFor(model => model.UserUpdate)</td>
+            </tr>
+        </table>
+    </fieldset>
+    <div style="margin:20px auto">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ModuleId }, new { @class = "others", style = "float:left" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "others", style = "float:left" })
+    </div>
+

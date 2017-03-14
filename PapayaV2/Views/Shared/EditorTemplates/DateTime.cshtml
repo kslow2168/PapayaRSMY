@@ -1,0 +1,13 @@
+﻿@model Nullable<System.DateTime>
+@if (Model.HasValue)
+{
+   @*@Html.TextBox( "" , String.Format( "{0:yyyy-MMMM-dd}" , Model.Value ) , new  { id = "date" , @class = "textbox" } )
+   @Html.TextBox("", String.Format("{0:hh:mm tt}", Model.Value), new { id = "time" , @class = "textbox" } )*@
+    @Html.TextBox("", String.Format("{0:dd-MM-yyyy}", Model.Value), new { @class = "datetime" })
+}
+else
+{
+   @*@Html.TextBox("", String.Format("{0:dd-MM-yyyy}", DateTime.Now), new { id = "date", @class = "textbox" })
+   @Html.TextBox("", String.Format("{0:hh:mm tt}", DateTime.Now), new { id = "time" , @class = "textbox" })*@
+    @Html.TextBox("", String.Format("{0:dd-MM-yyyy}", DateTime.Now), new { @class = "datetime" })
+}

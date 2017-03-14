@@ -1,0 +1,75 @@
+﻿@model PapayaX2.Models.AclManageModel
+
+@{
+    ViewBag.Title = ViewBag.ModuleName + " - Access Control";
+}
+
+<h2>@ViewBag.ModuleName - Access Control</h2>
+
+@if(TempData["Notification"] != null)
+{
+    @Html.Raw(TempData["Notification"].ToString());
+}
+
+<script type="text/javascript">
+    var checked = false;
+    function checkAll() {
+        var field = document.acl_manage_form.input;
+        for (i = 0; i < field.length; i++) {
+            field[i].checked = !checked;
+        }
+        checked = !checked;
+    }
+</script>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new {name="acl_manage_form"}))
+{
+    @Html.Hidden("group_id", ViewData["id"])
+    
+    <p>
+    Access control list for group [ @ViewData["name"] ]
+    </p>
+    
+    <div style="margin-bottom:60px">
+        <input type="submit" value="Save" style="float:left" />
+        @Html.ActionLink("Back to Group List", "Index", null, new { @class = "others", style = "float:left;width:130px" })
+    </div>
+    
+    <table class="index">
+        <tr>
+            <th>
+                Module
+            </th>
+            <th>
+                Action
+            </th>
+            <th>
+                Access | <a href="#" onclick="checkAll()" style="color:#E4F5FC">Check/Uncheck All</a>
+            </th>
+        </tr>
+
+    @foreach (var item in Model.action)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.rs_module.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td align="left">
+                @if (Model.user_acl.Any(e => e.ActionId == item.ActionId))
+                {
+                    <input type="checkbox" name="input" value="@item.ActionId" checked="checked" />
+                }
+                else
+                {   
+                    <input type="checkbox" name="input" value="@item.ActionId" />
+                }
+
+            </td>
+        </tr>
+        
+    }
+    </table>
+}

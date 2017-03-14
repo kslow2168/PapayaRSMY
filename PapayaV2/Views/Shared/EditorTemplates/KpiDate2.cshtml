@@ -1,0 +1,15 @@
+﻿@model Nullable<System.DateTime>
+@if (Model.HasValue)
+{
+    @Html.TextBox("", String.Format("{0:yyyy-MM-dd}", Model.Value), new { id = "kpidate2", @class = "textbox" })
+}
+else
+{
+    @Html.TextBox("", String.Format("{0:yyyy-MM-dd}", DateTime.Now), new { id = "kpidate2", @class = "textbox" })
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#kpidate2").datepicker({ dateFormat: 'yy-mm-dd', showButtonPanel: true });
+    });
+</script>

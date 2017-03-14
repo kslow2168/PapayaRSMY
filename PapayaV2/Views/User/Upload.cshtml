@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = ViewBag.ModuleName + " - Upload";
+}
+
+<h2>@ViewBag.ModuleName - Upload</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        @Html.Raw(ViewBag.Notification)
+
+        <div class="editor-label">
+            File
+        </div>
+        <div class="editor-field">
+            <input type="file" name="file" id="file"/>
+        </div>
+
+        <div style="margin:20px auto">
+            <input type="submit" value="Upload" style="float:left" />
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "others", style="float:left" })
+        </div>
+    </fieldset>
+}

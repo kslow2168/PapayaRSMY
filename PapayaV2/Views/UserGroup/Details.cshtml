@@ -1,0 +1,50 @@
+﻿@modelPapayaX2.Database.rs_user_group
+
+@{
+    ViewBag.Title = ViewBag.ModuleName + " - Details";
+}
+
+<h2>@ViewBag.ModuleName - Details</h2>
+
+@if(TempData["Notification"] != null)
+{
+    @Html.Raw(TempData["Notification"].ToString());
+}
+
+<fieldset>
+    <br />
+    <table class="others">
+        <tr>
+            <td class="other">Name</td>
+            <td>@Html.DisplayFor(model => model.Name)</td>
+        </tr>
+        <tr>
+            <td class="other">Description</td>
+            <td>@Html.DisplayFor(model => model.Description)</td>
+        </tr>
+        <tr>
+            <td class="other">Active @ViewBag.ModuleName?</td>
+            <td>@Html.DisplayFor(model => model.FlagActive) Yes</td>
+        </tr>
+        <tr>
+            <td class="other">Date Entry</td>
+            <td>@Html.DisplayFor(model => model.DateEntry)</td>
+        </tr>
+        <tr>
+            <td class="other">User Entry</td>
+            <td>@Html.DisplayFor(model => model.UserEntry)</td>
+        </tr>
+        <tr>
+            <td class="other">Last Update On</td>
+            <td>@Html.DisplayFor(model => model.DateUpdate)</td>
+        </tr>
+        <tr>
+            <td class="other">Last Update By</td>
+            <td>@Html.DisplayFor(model => model.UserUpdate)</td>
+        </tr>
+    </table>
+</fieldset>
+<div style="margin:20px auto">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GroupId }, new { @class = "others", style = "float:left" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "others", style="float:left" })
+</div>

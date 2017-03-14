@@ -1,0 +1,112 @@
+﻿@model PapayaX2.Models.MenuModel
+
+@{string activeLink = ViewContext.RouteData.GetRequiredString("controller");}
+    
+@helper GetChild(PapayaX2.Database.rs_module item, int level)
+{
+if (User.Identity.Name != "papaya")
+{
+
+    if (Model.acl.Where(e => e.rs_action.ModuleId == item.ModuleId).ToList().Count == 0 && level > 1)
+    {
+        return;
+    }
+}
+
+string activeLink = ViewContext.RouteData.GetRequiredString("controller");
+bool hasChild = false;
+
+if (Model.module.Where(m => m.ParentModuleId == item.ModuleId && m.IsBackEnd == true && m.FlagActive == true).Count() > 0)
+{
+    hasChild = true;
+}
+
+
+if (hasChild)
+{
+    if (level < 2)
+    {
+            <li class="dropdown">
+                
+                @if (item.Controller == "Header")
+                {
+                <a href="#" style="padding-left: 15px;">@item.Name <i class="icon-angle-down"></i></a>
+                }
+                else
+                {
+                @Html.ActionLink(item.Name, "Index", item.Controller, null, new { @class = "has-child", style = (item.Controller == activeLink) ? "padding-left: 25px; font-weight: 900" : "" })
+                }
+                <ul class="dropdown-menu bold">
+                    @foreach (var child in Model.module.Where(m => m.ParentModuleId == item.ModuleId && m.IsBackEnd == true && m.FlagActive == true).OrderBy(m => m.ModuleOrder))
+                    {
+                        @GetChild(child, 2)
+                    }
+                </ul>
+            </li>
+    }
+    else
+    {
+            <li class="dropdown">
+               
+                @if (item.Controller == "Header")
+                {
+                    <a href="#" style="padding-left: 15px;">@item.Name <i class="icon-angle-right"></i></a>
+                }
+                else
+                {
+                    @Html.ActionLink(item.Name, "Index", item.Controller, null, new { @class = "has-child", style = (item.Controller == activeLink) ? "padding-left: 25px; font-weight: 900" : "" })
+                }
+                <ul style="display: none;" class="dropdown-menu sub-menu-level1 bold">
+                    @foreach (var child in Model.module.Where(m => m.ParentModuleId == item.ModuleId && m.IsBackEnd == true && m.FlagActive == true).OrderBy(m => m.ModuleOrder))
+                    {
+                        @GetChild(child, 2)
+                    }
+                </ul>
+            </li>
+    }
+}
+else
+{
+            <li>
+            @if (item.Controller == "Header")
+            {
+                <a href="#" style="padding-left: 15px;">@item.Name</a>
+                }
+                else
+                {
+                @Html.ActionLink(item.Name, "Index", item.Controller, null, new { style = (item.Controller == activeLink) ? "padding-left: 25px; font-weight: 900" : "" })
+
+                }
+            </li>
+        }
+}
+
+@if (Request.IsAuthenticated)
+{
+
+    <ul class="nav topnav bold">
+        <li class="dropdown">
+            <a href="#">Welcome @User.Identity.Name <i class="icon-angle-down"></i></a>
+            <ul class="dropdown-menu bold">
+                <li><a href="/ChangePassword">Change Password</a></li>
+                <li><a href="/Home/Logout">Logout</a></li>
+            </ul>
+        </li>
+
+        @foreach (var module in Model.module.Where(m => m.ParentModuleId == null && m.IsBackEnd == true && m.FlagActive == true).OrderBy(m => m.ModuleOrder))
+        {
+            if (User.Identity.Name != "papaya")
+            {
+                if (Model.acl.Where(e => e.rs_action.ModuleId == module.ModuleId) != null)
+                {
+                    @GetChild(module, 1);
+                }
+            }
+            else
+            {
+                @GetChild(module, 1);
+            }
+        }
+
+    </ul>
+}

@@ -1,0 +1,1341 @@
+﻿<!----View for create new asset-->
+
+
+@model PapayaX2.Models.SystemModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@if (TempData["Notification"] != null)
+{
+    @Html.Raw(TempData["Notification"].ToString());
+}
+
+
+<script>
+    function getSubAssetDetails() {
+        var id = jQuery("#subAssetId").val();
+
+        jQuery.ajax({
+            url: '@Url.Action("GetAssetDetails", "Assets")',
+            method: "POST",
+            cache: false,
+            data: { assetId: id }
+
+        }).done(function (data) {
+            jQuery("#subOwnerShip").val(data.OwnerShip);
+            jQuery("#subBrand").val(data.Brand);
+            jQuery("#subModel").val(data.Model);
+            jQuery("#subDescription").val(data.Description);
+            jQuery("#subSerialNumber").val(data.SerialNumber);
+
+        });
+    }
+
+
+</script>
+
+<script>
+        $(function () {
+            $("#dialog-add-asset").dialog({
+                autoOpen: false,
+                resizable: false,
+                width: 500,
+                height: 580,
+                modal: true,
+                show: {
+                    effect: "blind",
+                    duration: 500
+                },
+                hide: {
+                    effect: "blind",
+                    duration: 500
+                }
+            });
+
+            $("#modal-opener").click(function () {
+                $("#dialog-add-asset").dialog("open");
+            });
+        });
+
+        function onSuccess() {
+            $("#dialog-add-asset").dialog("close");
+        }
+</script>
+
+<script>
+        $(function () {
+            $("#dialog-attach-asset").dialog({
+                autoOpen: false,
+                resizable: false,
+                width: 500,
+                height: 580,
+                modal: true,
+                show: {
+                    effect: "blind",
+                    duration: 500
+                },
+                hide: {
+                    effect: "blind",
+                    duration: 500
+                }
+            });
+
+            $("#modal-attach").click(function () {
+                $("#dialog-attach-asset").dialog("open");
+            });
+        });
+
+        function onSuccess() {
+            $("#dialog-attach-asset").dialog("close");
+        }
+</script>
+
+<script>
+        $(function () {
+            $("#dialog-add-accessories").dialog({
+                autoOpen: false,
+                resizable: false,
+                width: 500,
+                height: 380,
+                modal: true,
+                show: {
+                    effect: "blind",
+                    duration: 500
+                },
+                hide: {
+                    effect: "blind",
+                    duration: 500
+                }
+            });
+
+            $("#modal-accessories").click(function () {
+                $("#dialog-add-accessories").dialog("open");
+            });
+        });
+
+        function onSuccess() {
+            $("#dialog-add-accessories").dialog("close");
+        }
+</script>
+
+<style>
+    .custom-combobox {
+        position: relative;
+        display: inline-block;
+    }
+
+    .custom-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* support: IE7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+
+    .custom-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+    }
+</style>
+
+@if (Model.Step == 1 || Model.Step == 0)
+{
+
+    using (Html.BeginForm("Create", "Assets", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Raw(ViewBag.Notification)
+        <div class="form-horizontal">
+            <h4>rs_assets</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="editor-label">
+                Division
+                <div class="editor-field">
+                    @Html.DropDownList("DivId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.System.DivId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                Ownership
+                <div class="editor-field">
+                    @Html.DropDownList("OwnerShipId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.System.OwnerShipId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.ImageLink, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    <input id="ImagePath" title="Upload an Asset image"
+                           type="file" name="file" multiple accept='image/*' />
+                    @Html.ValidationMessageFor(model => model.System.ImageLink, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.Brand, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.Brand, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.Model, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.Model, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.Model, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.Desciption, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.Desciption, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.Desciption, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.SerialNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.SerialNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.SerialNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.MaterialNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.MaterialNo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.MaterialNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.HardwareOpt, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.HardwareOpt, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.HardwareOpt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.SoftwareOpt, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.SoftwareOpt, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.SoftwareOpt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.HardwareVer, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.HardwareVer, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.HardwareVer, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.SoftwareVer, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.SoftwareVer, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.SoftwareVer, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @{ Html.EnableClientValidation(false); }
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.LicenseExpiry, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.LicenseExpiry, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.LicenseExpiry, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @{ Html.EnableClientValidation(true); }
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.Accessories, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.Accessories, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.Accessories, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.Remarks, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @{ Html.EnableClientValidation(false); }
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.PurchaseDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.PurchaseDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @{ Html.EnableClientValidation(true); }
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.PurchasePrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.PurchasePrice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.PurchasePrice, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @{ Html.EnableClientValidation(false); }
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.DecomDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.DecomDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.DecomDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @{ Html.EnableClientValidation(true); }
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.DecomReason, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.DecomReason, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.DecomReason, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.Tagged, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.System.Tagged)
+                        @Html.ValidationMessageFor(model => model.System.Tagged, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.Damaged, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.System.Damaged)
+                        @Html.ValidationMessageFor(model => model.System.Damaged, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            @{ Html.EnableClientValidation(false); }
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.LastCalibrated, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.LastCalibrated, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.LastCalibrated, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @{ Html.EnableClientValidation(true); }
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.CalibrationCycle, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.CalibrationCycle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.CalibrationCycle, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.OwnedBy, "OwnerId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.DropDownList("OwnerId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.System.OwnedBy, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.ReadyToSell, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.System.ReadyToSell)
+                        @Html.ValidationMessageFor(model => model.System.ReadyToSell, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.Availability, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.Availability, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.Availability, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.OriginLocId, "OriginLocId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.DropDownList("OriginLocId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.System.OriginLocId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.CurrentLocId, "CurrentLocId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.DropDownList("CurrentLocId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.System.CurrentLocId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.PurchasePO, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.PurchasePO, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.PurchasePO, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.DepreciationFormula, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.DepreciationFormula, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.DepreciationFormula, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.ViewedStats, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.ViewedStats, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.ViewedStats, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.FeaturedOrder, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.System.FeaturedOrder, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.System.FeaturedOrder, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.Featured, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.System.Featured)
+                        @Html.ValidationMessageFor(model => model.System.Featured, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.System.IsSystem, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.System.IsSystem)
+                        @Html.ValidationMessageFor(model => model.System.IsSystem, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-label">
+                <div class="col-md-offset-2 editor-field">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+                }
+
+                <div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+
+
+                }
+                else if (Model.Step == 2 || Model.Step == 3)
+                {
+
+
+                    @Html.Raw(ViewBag.Notification)
+
+                    <table>
+                        <tr>
+                            <td><h2>Asset - @Model.System.Model</h2></td>
+                            <td>
+                                @if (Model.System.IsSystem)
+                                {
+                                    <a href="#" id="modal-opener" class="create" title="Add Sub-Asset"></a>
+                                    <a href="#" id="modal-attach" class="create" title="Attach Sub-Asset"></a>
+
+                                }
+                                <a href="#" id="modal-accessories" class="adjust" title="Add Accessories"></a>
+                                @Html.ActionLink(" ", "Edit", new { id = Model.System.AssetId }, new { @class = "edit", title = "Edit Asset" })
+                            </td>
+
+                        </tr>
+                    </table>
+
+                    <div>
+
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.DivId)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.DivId)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.ParentId)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.ParentId)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.Brand)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.Brand)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.Model)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.Model)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.Desciption)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.Desciption)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.SerialNumber)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.SerialNumber)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.MaterialNo)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.MaterialNo)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.HardwareOpt)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.HardwareOpt)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.SoftwareOpt)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.SoftwareOpt)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.HardwareVer)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.HardwareVer)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.SoftwareVer)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.SoftwareVer)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.LicenseExpiry)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.LicenseExpiry)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.Accessories)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.Accessories)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.Remarks)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.Remarks)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.PurchaseDate)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.PurchaseDate)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.PurchasePrice)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.PurchasePrice)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.DecomDate)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.DecomDate)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.DecomReason)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.DecomReason)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.Tagged)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.Tagged)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.Damaged)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.Damaged)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.LastCalibrated)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.LastCalibrated)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.CalibrationCycle)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.CalibrationCycle)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.CreatedDate)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.CreatedDate)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.UpdatedDate)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.UpdatedDate)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.CreatedBy)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.CreatedBy)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.OwnedBy)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.OwnedBy)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.TrackingNo)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.TrackingNo)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.ReadyToSell)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.ReadyToSell)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.Availability)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.Availability)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.PurchasePO)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.PurchasePO)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.DepreciationFormula)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.DepreciationFormula)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.ImageLink)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.ImageLink)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.ViewedStats)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.ViewedStats)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.BookingStats)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.BookingStats)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.FeaturedOrder)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.FeaturedOrder)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.Featured)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.Featured)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.IsSystem)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.IsSystem)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.rs_locations.LocationName)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.rs_locations.LocationName)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.System.rs_locations1.LocationName)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.System.rs_locations1.LocationName)
+                            </dd>
+
+                        </dl>
+                    </div>
+
+                    if (Model.Step == 3)
+                    {
+
+                        if (Model.System.rs_accessories.Count > 0)
+                        {
+                            <table class="index">
+                                <tr>
+                                    <th>
+                                        Accessories
+                                    </th>
+                                    <th>
+                                        Descriptions
+                                    </th>
+                                    <th>
+                                        Remarks
+                                    </th>
+
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model.System.rs_accessories)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Accessories)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Remarks)
+                                        </td>
+
+                                        <td>
+                                            @Html.ActionLink("Edit", "EditAcc", new { id = item.AccId }) |
+                                            @Html.ActionLink("Details", "DetailsAcc", new { id = item.AccId }) |
+                                            @Html.ActionLink("Delete", "DeleteAcc", new { id = item.AccId })
+                                        </td>
+                                    </tr>
+                                }
+
+
+                            </table>
+                        }
+                    }
+                    if (Model.System.IsSystem && Model.Assets.Count > 0)
+                    {
+                        <table class="index">
+                            <tr>
+                                <th>
+                                    Brand
+                                </th>
+                                <th>
+                                    Model
+                                </th>
+                                <th>
+                                    Description
+                                </th>
+                                <th>
+                                    Serial No
+                                </th>
+                                <th>
+                                    Material No
+                                </th>
+                                <th>
+                                    Tracking No
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model.Assets)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Brand)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Model)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Desciption)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SerialNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MaterialNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TrackingNo)
+                                    </td>
+
+                                    <td>
+
+                                        @Html.ActionLink("Delete", "DeleteRel", new { id = item.AssetId, parentId = Model.System.AssetId })
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </table>
+                    }
+                }
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.System.AssetId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
+
+
+<div id="dialog-attach-asset" title="Attach Sub System">
+
+    @using (Html.BeginForm("AttachSubAsset", "Assets", FormMethod.Post, new { SysId = "SysSubId" }))
+            {
+
+       
+
+        <div class="form-horizontal">
+            <h4>Attach Sub Asset</h4>
+            <hr />
+           
+            @Html.HiddenFor(model => model.SystemId, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="editor-label">
+                Please select an Asset
+            </div>
+            <div class="editor-field">
+
+                @Html.DropDownList("SubAssetId", null, htmlAttributes: new { @class = "form-control", id = "subAssetId", onchange = "getSubAssetDetails()" })
+                @Html.ValidationMessageFor(model => model.SubAssetId)
+            </div>
+
+            <div class="editor-label">
+                OwnerShip
+            </div>
+            <div class="editor-field">
+                <input type="text" name="OwnerShip" id="subOwnerShip" value="" readonly>
+            </div>
+
+            <div class="editor-label">
+                Brand
+            </div>
+            <div class="editor-field">
+                <input type="text" name="Brand" id="subBrand" value="" readonly>
+            </div>
+
+            <div class="editor-label">
+                Model
+            </div>
+            <div class="editor-field">
+                <input type="text" name="Model" id="subModel" value="" readonly>
+            </div>
+
+            <div class="editor-label">
+                Description
+            </div>
+            <div class="editor-field">
+                <input type="text" name="Description" id="subDescription" value="" readonly>
+            </div>
+
+            <div class="editor-label">
+                Serial Number
+            </div>
+            <div class="editor-field">
+                <input type="text" name="SerialNumber" id="subSerialNumber" value="" readonly>
+            </div>
+
+
+            <div class="editor-label">
+                <div class="col-md-offset-2 editor-field">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<div id="dialog-add-asset" title="Add Sub System">
+
+
+    @using (Html.BeginForm("AddAsset", "Assets", FormMethod.Post, new { SysId = "SysId" }))
+            {
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Add Asset</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.System.AssetId, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="editor-label">
+                Division
+                <div class="editor-field">
+                    @Html.DropDownList("DivId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SubAsset.DivId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="editor-label">
+                Ownership
+                <div class="editor-field">
+                    @Html.DropDownList("OwnerShipId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SubAsset.OwnerShipId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.ImageLink, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    <input id="ImagePath" title="Upload an Sub-Asset image"
+                           type="file" name="file" multiple accept='image/*' />
+                    @Html.ValidationMessageFor(model => model.SubAsset.ImageLink, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.Brand, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.Brand, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.Model, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.Model, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.Model, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.Desciption, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.Desciption, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.Desciption, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.SerialNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.SerialNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.SerialNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.MaterialNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.MaterialNo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.MaterialNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.HardwareOpt, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.HardwareOpt, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.HardwareOpt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.SoftwareOpt, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.SoftwareOpt, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.SoftwareOpt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.HardwareVer, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.HardwareVer, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.HardwareVer, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.SoftwareVer, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.SoftwareVer, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.SoftwareVer, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @{ Html.EnableClientValidation(false); }
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.LicenseExpiry, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.LicenseExpiry, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.LicenseExpiry, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @{ Html.EnableClientValidation(true); }
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.Accessories, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.Accessories, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.Accessories, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.Remarks, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @{ Html.EnableClientValidation(false); }
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.PurchaseDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.PurchaseDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @{ Html.EnableClientValidation(true); }
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.PurchasePrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.PurchasePrice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.PurchasePrice, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @{ Html.EnableClientValidation(false); }
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.DecomDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.DecomDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.DecomDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @{ Html.EnableClientValidation(true); }
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.DecomReason, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.DecomReason, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.DecomReason, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.Tagged, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.SubAsset.Tagged)
+                        @Html.ValidationMessageFor(model => model.SubAsset.Tagged, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.Damaged, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.SubAsset.Damaged)
+                        @Html.ValidationMessageFor(model => model.SubAsset.Damaged, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            @{ Html.EnableClientValidation(false); }
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.LastCalibrated, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.LastCalibrated, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.LastCalibrated, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @{ Html.EnableClientValidation(true); }
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.CalibrationCycle, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.CalibrationCycle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.CalibrationCycle, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.OwnedBy, "OwnerId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.DropDownList("OwnerId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SubAsset.OwnedBy, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.ReadyToSell, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.SubAsset.ReadyToSell)
+                        @Html.ValidationMessageFor(model => model.SubAsset.ReadyToSell, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.Availability, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.Availability, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.Availability, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.OriginLocId, "OriginLocId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.DropDownList("OriginLocId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SubAsset.OriginLocId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.CurrentLocId, "CurrentLocId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.DropDownList("CurrentLocId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SubAsset.CurrentLocId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.PurchasePO, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.PurchasePO, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.PurchasePO, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.DepreciationFormula, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.DepreciationFormula, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.DepreciationFormula, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.ViewedStats, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.ViewedStats, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.ViewedStats, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.FeaturedOrder, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SubAsset.FeaturedOrder, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubAsset.FeaturedOrder, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubAsset.Featured, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.SubAsset.Featured)
+                        @Html.ValidationMessageFor(model => model.SubAsset.Featured, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-label">
+                <div class="col-md-offset-2 editor-field">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+                }
+</div>
+
+
+<div id="dialog-add-accessories" title="Add Aceesories">
+
+    @using (Html.BeginForm("AddAccessories", "Assets", FormMethod.Post, new { SysId = "SysAccId" }))
+            {
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Add Aceesories</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.System.AssetId, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Accessories.Accessories, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Accessories.Accessories, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Accessories.Accessories, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Accessories.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Accessories.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Accessories.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Accessories.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Accessories.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Accessories.Remarks, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                <div class="col-md-offset-2 editor-field">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
+

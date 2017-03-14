@@ -1,0 +1,236 @@
+﻿@model PapayaX2.Models.BookData
+
+@{
+    ViewBag.Title = "New Booking";
+}
+
+@if (TempData["Notification"] != null)
+{
+    @Html.Raw(TempData["Notification"].ToString());
+}
+
+
+<script type='text/javascript'>
+//<![CDATA[
+$(window).load(function(){
+    var notAvailableDates = [@Html.Raw(Model.BookedDateStr)];
+
+function available(date) {
+  dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
+  if ($.inArray(dmy, notAvailableDates) == -1) {
+    return [true, "","Available"];
+  } else {
+    return [false,"","unAvailable"];
+  }
+}
+
+$('#StartDate').datepicker({ dateFormat: 'dd-mm-yy', beforeShowDay: available });
+$('#EndDate').datepicker({ dateFormat: 'dd-mm-yy', beforeShowDay: available });
+});//]]>
+
+</script>
+
+
+    @using (Html.BeginForm()) 
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal">
+            <h4>New Booking</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="editor-label">
+               Brand
+                <div class="editor-field">
+                   @Html.EditorFor(model => model.Asset.Brand, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                Model
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Asset.Model, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                Description
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Asset.Desciption, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                Serial Number
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Asset.SerialNumber, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                Tracking Number
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Asset.TrackingNo, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                Ownership
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Asset.rs_ownership.OwnerType, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                Owner
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Asset.rs_user.Username, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                </div>
+            </div>
+
+            @{ Html.EnableClientValidation(false); }
+    
+            <div class="editor-label">
+                Start Date
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                   
+                </div>
+            </div>
+
+            @{ Html.EnableClientValidation(true); }
+
+            @{ Html.EnableClientValidation(false); }
+            <div class="editor-label">
+                End Date
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                  
+                </div>
+            </div>
+
+            @{ Html.EnableClientValidation(true); }
+
+            <div class="editor-label">
+                Loan Location
+                <div class="editor-field">
+                    <div class="checkbox">
+                        @Html.DropDownList("LoanLocationId", null, htmlAttributes: new { id = "combobox" })
+                        @Html.ValidationMessageFor(model => model.LoanLocationId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.BookPurpose, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.BookPurpose)
+                        @Html.ValidationMessageFor(model => model.BookPurpose, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.IsBookOnBehalf)
+            {
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ResquestorId, "ResquestorId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="editor-field">
+                    @Html.DropDownList("ResquestorId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ResquestorId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.ResquestorId, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.ValidationMessageFor(model => model.ResquestorId, "", new { @class = "text-danger" })
+            }
+
+            <div class="editor-label">
+                <div class="col-md-offset-2 editor-field">
+                    <input type="submit" value="Book" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+<div>
+    Existing Booking Table
+
+    <table class="table">
+        <tr>
+            <th>
+                Start Date
+            </th>
+            <th>
+                End Date
+            </th>
+            <th>
+               Booked By
+            </th>
+            <th>
+               Location
+            </th>
+            <th>
+              Purpose
+            </th>
+            <th>
+              Remark
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model.Bookings)
+        {
+            <tr>
+                <td>
+                    @{
+
+                        string StartDate = item.StartDate.ToString("dd-MMM-yyyy");
+
+
+                    }
+                    @Html.DisplayFor(modelItem => StartDate)
+                </td>
+                <td>
+                    @{
+
+                        string EndDate = item.EndDate.ToString("dd-MMM-yyyy");
+
+                    }
+                    @Html.DisplayFor(modelItem => EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.rs_user2.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.rs_locations.LocationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purpose)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remarks)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</div>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>

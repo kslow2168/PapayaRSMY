@@ -1,0 +1,84 @@
+﻿@model IEnumerable<PapayaX2.Database.rs_user_group>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#search").DefaultValue("Search");
+    });
+</script>
+
+@{
+    ViewBag.Title = ViewBag.ModuleName + " - List";
+}
+
+<h2>@ViewBag.ModuleName - List</h2>
+
+@if(TempData["Notification"] != null)
+{
+    @Html.Raw(TempData["Notification"].ToString());
+}
+
+<div>
+    <div style="float:left">
+        @Html.ActionLink(" ", "Create", null, new { @class = "create", title = "Create New" })
+    </div>
+    <li id="searchbox">
+        @using (Html.BeginForm())
+        {
+            <div class="searchbox">
+                @Html.TextBox("search", (string)ViewBag.search, new { id = "search" })
+                <input type="submit" value="Search" />                
+            </div>
+        }
+    </li>
+    <br />
+    <br />
+    <br />
+</div>
+
+<table class="index">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Active @ViewBag.ModuleName
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+@if (Model.Count() > 0)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlagActive)
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Edit", new { id = item.GroupId }, new { @class = "edit", title = "Edit" })
+                @Html.ActionLink(" ", "Delete", new { id = item.GroupId }, new { @class = "delete", title = "Delete" })
+                @Html.ActionLink(" ", "Details", new { id = item.GroupId }, new { @class = "detail", title = "Details" })
+                @Html.ActionLink(" ", "Manage", new { id = item.GroupId, name=item.Name }, new { @class = "access", title = "Manage" })
+            </td>
+        </tr>
+    }
+}
+else
+{
+    <tr>
+        <td colspan="4">No @ViewBag.ModuleName data found !</td>
+    </tr>
+}
+
+</table>

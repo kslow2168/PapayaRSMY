@@ -1,0 +1,64 @@
+body {
+    font-family: Roboto;
+    color: #e1e9ef;
+    background-image: url("images/loginbg.png");
+    background-repeat: repeat;
+}
+
+.centered-login {
+    width: 400px;
+    max-width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+.login-section ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.login-section li {
+    margin: 10px 0;
+    color: #000000;
+}
+
+input {
+    display: block;
+    margin: auto;
+    width: calc(100% - 40px);
+    font-size: 12px;
+    height: 30px;
+    padding: 5px 10px;
+    outline: none;
+    border: none;
+    border-bottom: solid 2px #969696;
+}
+
+.login-button {
+    width: calc(100% - 20px);
+}
+
+.profile-ph {
+    width: 80px;
+    height: 80px;
+    border-radius: 40%;
+    margin: 15px auto 15px auto;
+}
+
+.login-head {
+    background-color: #0c91ff;
+    border: none;
+    padding: 12px;
+    font-weight: 550;
+}
+
+.mdl-card {
+    min-height: 0 !important;
+    min-width: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: auto !important;
+    max-height: auto !important;
+    background-color: #f1f1f1 !important;
+}

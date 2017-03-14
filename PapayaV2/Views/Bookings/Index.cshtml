@@ -1,0 +1,96 @@
+﻿@model PapayaX2.Models.BookSearchModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@if (TempData["Notification"] != null)
+{
+    @Html.Raw(TempData["Notification"].ToString());
+}
+
+
+    <table class="table">
+        <tr>
+            <th>
+               Brand
+            </th>
+            <th>
+               Model
+            </th>
+            <th>
+              S/N
+            </th>
+            <th>
+              Tracking No
+            </th>
+            <th>
+              Start Date
+            </th>
+            <th>
+              End Date
+            </th>
+            <th>
+              Requestor
+            </th>
+            <th>
+               Purpose
+            </th>
+            <th>
+              Location
+            </th>
+            <th>
+               Remarks
+            </th>
+         <th></th>
+        </tr>
+    
+    @foreach (var item in Model.Bookings) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.rs_assets.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rs_assets.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rs_assets.SerialNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rs_assets.TrackingNo)
+            </td>
+            <td>
+                @{
+
+                    string StartDate = item.StartDate.ToString("dd-MMM-yyyy");
+
+                }
+                @Html.DisplayFor(modelItem => StartDate)
+            </td>
+            <td>
+                @{
+
+                    string EndDate = item.EndDate.ToString("dd-MMM-yyyy");
+
+                }
+                @Html.DisplayFor(modelItem => EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rs_user2.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Purpose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rs_locations.LocationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+            <td>
+                @Html.ActionLink("Extend Booking", "BookExtension", new { bookingId = item.BookId }) |
+            </td>
+        </tr>
+    }
+    
+    </table>

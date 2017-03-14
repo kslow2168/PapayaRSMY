@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PapayaDBStoreContainer" CdmEntityContainer="PapayaEntities">
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="PapayaDB.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="PapayaDB.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="PapayaDB.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="PapayaDB.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PapayaDB.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="PapayaDB.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PapayaDB.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="PapayaDB.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="PapayaDB.Store.sp_upgraddiagrams" />
+    <EntitySetMapping Name="rs_accessories">
+      <EntityTypeMapping TypeName="PapayaDB.rs_accessories">
+        <MappingFragment StoreEntitySet="rs_accessories">
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Accessories" ColumnName="Accessories" />
+          <ScalarProperty Name="AssetId" ColumnName="AssetId" />
+          <ScalarProperty Name="AccId" ColumnName="AccId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rs_action">
+      <EntityTypeMapping TypeName="PapayaDB.rs_action">
+        <MappingFragment StoreEntitySet="rs_action">
+          <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="DateEntry" ColumnName="DateEntry" />
+          <ScalarProperty Name="UserEntry" ColumnName="UserEntry" />
+          <ScalarProperty Name="FlagActive" ColumnName="FlagActive" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rs_assets">
+      <EntityTypeMapping TypeName="PapayaDB.rs_assets">
+        <MappingFragment StoreEntitySet="rs_assets">
+          <ScalarProperty Name="IsSystem" ColumnName="IsSystem" />
+          <ScalarProperty Name="Featured" ColumnName="Featured" />
+          <ScalarProperty Name="FeaturedOrder" ColumnName="FeaturedOrder" />
+          <ScalarProperty Name="BookingStats" ColumnName="BookingStats" />
+          <ScalarProperty Name="ViewedStats" ColumnName="ViewedStats" />
+          <ScalarProperty Name="ImageLink" ColumnName="ImageLink" />
+          <ScalarProperty Name="DepreciationFormula" ColumnName="DepreciationFormula" />
+          <ScalarProperty Name="PurchasePO" ColumnName="PurchasePO" />
+          <ScalarProperty Name="CurrentLocId" ColumnName="CurrentLocId" />
+          <ScalarProperty Name="OriginLocId" ColumnName="OriginLocId" />
+          <ScalarProperty Name="Availability" ColumnName="Availability" />
+          <ScalarProperty Name="ReadyToSell" ColumnName="ReadyToSell" />
+          <ScalarProperty Name="TrackingNo" ColumnName="TrackingNo" />
+          <ScalarProperty Name="OwnedBy" ColumnName="OwnedBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CalibrationCycle" ColumnName="CalibrationCycle" />
+          <ScalarProperty Name="LastCalibrated" ColumnName="LastCalibrated" />
+          <ScalarProperty Name="Damaged" ColumnName="Damaged" />
+          <ScalarProperty Name="Tagged" ColumnName="Tagged" />
+          <ScalarProperty Name="DecomReason" ColumnName="DecomReason" />
+          <ScalarProperty Name="DecomDate" ColumnName="DecomDate" />
+          <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+          <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Accessories" ColumnName="Accessories" />
+          <ScalarProperty Name="LicenseExpiry" ColumnName="LicenseExpiry" />
+          <ScalarProperty Name="SoftwareVer" ColumnName="SoftwareVer" />
+          <ScalarProperty Name="HardwareVer" ColumnName="HardwareVer" />
+          <ScalarProperty Name="SoftwareOpt" ColumnName="SoftwareOpt" />
+          <ScalarProperty Name="HardwareOpt" ColumnName="HardwareOpt" />
+          <ScalarProperty Name="MaterialNo" ColumnName="MaterialNo" />
+          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+          <ScalarProperty Name="Desciption" ColumnName="Desciption" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="AssetId" ColumnName="AssetId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rs_assets_rel">
+      <EntityTypeMapping TypeName="PapayaDB.rs_assets_rel">
+        <MappingFragment StoreEntitySet="rs_assets_rel">
+          <ScalarProperty Name="AssetId" ColumnName="AssetId" />
+          <ScalarProperty Name="SysId" ColumnName="SysId" />
+          <ScalarProperty Name="RelationId" ColumnName="RelationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rs_bookings">
+      <EntityTypeMapping TypeName="PapayaDB.rs_bookings">
+        <MappingFragment StoreEntitySet="rs_bookings">
+          <ScalarProperty Name="VerifyBy" ColumnName="VerifyBy" />
+          <ScalarProperty Name="LoanFormId" ColumnName="LoanFormId" />
+          <ScalarProperty Name="Damaged" ColumnName="Damaged" />
+          <ScalarProperty Name="ReturnLocationId" ColumnName="ReturnLocationId" />
+          <ScalarProperty Name="LoanLocationId" ColumnName="LoanLocationId" />
+          <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+          <ScalarProperty Name="Returned" ColumnName="Returned" />
+          <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="AssetId" ColumnName="AssetId" />
+          <ScalarProperty Name="ApproverId" ColumnName="ApproverId" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ResquestorId" ColumnName="ResquestorId" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+          <ScalarProperty Name="BookAt" ColumnName="BookAt" />
+          <ScalarProperty Name="Approved" ColumnName="Approved" />
+          <ScalarProperty Name="Extended" ColumnName="Extended" />
+          <ScalarProperty Name="ExtendedDate" ColumnName="ExtendedDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rs_bookstats">
+      <EntityTypeMapping TypeName="PapayaDB.rs_bookstats">
+        <MappingFragment StoreEntitySet="rs_bookstats">
+          <ScalarProperty Name="BookingCounts" ColumnName="BookingCounts" />
+          <ScalarProperty Name="Actions" ColumnName="Actions" />
+          <ScalarProperty Name="AssetId" ColumnName="AssetId" />
+          <ScalarProperty Name="DateId" ColumnName="DateId" />
+          <ScalarProperty Name="StatsId" ColumnName="StatsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rs_company">
+      <EntityTypeMapping TypeName="PapayaDB.rs_company">
+        <MappingFragment StoreEntitySet="rs_company">
+          <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="DateEntry" ColumnName="DateEntry" />
+          <ScalarProperty Name="UserEntry" ColumnName="UserEntry" />
+          <ScalarProperty Name="FlagActive" ColumnName="FlagActive" />
+          <ScalarProperty Name="CompanyUrl" ColumnName="CompanyUrl" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rs_dates">
+      <EntityTypeMapping TypeName="PapayaDB.rs_dates">
+        <MappingFragment StoreEntitySet="rs_dates">
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="QuarterName" ColumnName="QuarterName" />
+          <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+          <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="DateId" ColumnName="DateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rs_division">
+      <EntityTypeMapping TypeName="PapayaDB.rs_division">
+        <MappingFragment StoreEntitySet="rs_division">
+          <ScalarProperty Name="MarketSegments" ColumnName="MarketSegments" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DivisionNo" ColumnName="DivisionNo" />
+          <ScalarProperty Name="DivId" ColumnName="DivId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rs_loan_form">
+      <EntityTypeMapping TypeName="PapayaDB.rs_loan_form">
+        <MappingFragment StoreEntitySet="rs_loan_form">
+          <ScalarProperty Name="UploadedFile" ColumnName="UploadedFile" />
+          <ScalarProperty Name="Signed" ColumnName="Signed" />
+          <ScalarProperty Name="Returned" ColumnName="Returned" />
+          <ScalarProperty Name="Invalid" ColumnName="Invalid" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="ContactPersion" ColumnName="ContactPersion" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="RequestorId" ColumnName="RequestorId" />
+          <ScalarProperty Name="RequestNo" ColumnName="RequestNo" />
+          <ScalarProperty Name="LoanId" ColumnName="LoanId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rs_locations">
+      <EntityTypeMapping TypeName="PapayaDB.rs_locations">
+        <MappingFragment StoreEntitySet="rs_locations">
+          <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
+          <ScalarProperty Name="InternalName" ColumnName="InternalName" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rs_module">
+      <EntityTypeMapping TypeName="PapayaDB.rs_module">
+        <MappingFragment StoreEntitySet="rs_module">
+          <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="DateEntry" ColumnName="DateEntry" />
+          <ScalarProperty Name="UserEntry" ColumnName="UserEntry" />
+          <ScalarProperty Name="FlagActive" ColumnName="FlagActive" />
+          <ScalarProperty Name="IsBackEnd" ColumnName="IsBackEnd" />
+          <ScalarProperty Name="ModuleOrder" ColumnName="ModuleOrder" />
+          <ScalarProperty Name="MenuOrder" ColumnName="MenuOrder" />
+          <ScalarProperty Name="HaveChild" ColumnName="HaveChild" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ParentModuleId" ColumnName="ParentModuleId" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rs_smslogs">
+      <EntityTypeMapping TypeName="PapayaDB.rs_smslogs">
+        <MappingFragment StoreEntitySet="rs_smslogs">
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rs_syslog">
+      <EntityTypeMapping TypeName="PapayaDB.rs_syslog">
+        <MappingFragment StoreEntitySet="rs_syslog">
+          <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+          <ScalarProperty Name="User" ColumnName="User" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Operation" ColumnName="Operation" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
+          <ScalarProperty Name="ClientIP" ColumnName="ClientIP" />
+          <ScalarProperty Name="LogId" ColumnName="LogId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rs_user">
+      <EntityTypeMapping TypeName="PapayaDB.rs_user">
+        <MappingFragment StoreEntitySet="rs_user">
+          <ScalarProperty Name="DivId" ColumnName="DivId" />
+          <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="DateEntry" ColumnName="DateEntry" />
+          <ScalarProperty Name="UserEntry" ColumnName="UserEntry" />
+          <ScalarProperty Name="FlagActive" ColumnName="FlagActive" />
+          <ScalarProperty Name="IsBackEnd" ColumnName="IsBackEnd" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rs_user_group">
+      <EntityTypeMapping TypeName="PapayaDB.rs_user_group">
+        <MappingFragment StoreEntitySet="rs_user_group">
+          <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="DateEntry" ColumnName="DateEntry" />
+          <ScalarProperty Name="UserEntry" ColumnName="UserEntry" />
+          <ScalarProperty Name="FlagActive" ColumnName="FlagActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rs_useracl">
+      <EntityTypeMapping TypeName="PapayaDB.rs_useracl">
+        <MappingFragment StoreEntitySet="rs_useracl">
+          <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="DateEntry" ColumnName="DateEntry" />
+          <ScalarProperty Name="UserEntry" ColumnName="UserEntry" />
+          <ScalarProperty Name="FlagActive" ColumnName="FlagActive" />
+          <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="UserAclId" ColumnName="UserAclId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="PapayaDB.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

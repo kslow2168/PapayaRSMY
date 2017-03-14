@@ -1,0 +1,66 @@
+﻿@model PapayaX2.Database.rs_user
+
+@{
+    ViewBag.Title = ViewBag.ModuleName + " - Delete";
+}
+
+<h2>@ViewBag.ModuleName - Delete</h2>
+
+@if(TempData["Notification"] != null)
+{
+    @Html.Raw(TempData["Notification"].ToString());
+}
+
+<fieldset>
+    <legend>Are you sure you want to delete this?</legend>
+    <br />
+
+    <table class="others">
+        <tr>
+            <td class="other">Username</td>
+            <td>@Html.DisplayFor(model => model.Username)</td>
+        </tr>
+        <tr>
+            <td class="other">Full Name</td>
+            <td>@Html.DisplayFor(model => model.FullName)</td>
+        </tr>
+        @*<tr>
+            <td class="other">Mobile Number</td>
+            <td>@Html.DisplayFor(model => model.MobileNumber)</td>
+        </tr>
+        <tr>
+            <td class="other">Email</td>
+            <td>@Html.DisplayFor(model => model.Email)</td>
+        </tr>*@
+        <tr>
+            <td class="other">Group</td>
+            <td>@Html.DisplayFor(model => model.rs_user_group.Name)</td>
+        </tr>
+        <tr>
+            <td class="other">Active User?</td>
+            <td>@Html.DisplayFor(model => model.FlagActive) Yes</td>
+        </tr>
+        <tr>
+            <td class="other">Date Entry</td>
+            <td>@Html.DisplayFor(model => model.DateEntry)</td>
+        </tr>
+        <tr>
+            <td class="other">User Entry</td>
+            <td>@Html.DisplayFor(model => model.UserEntry)</td>
+        </tr>
+        <tr>
+            <td class="other">Last Update On</td>
+            <td>@Html.DisplayFor(model => model.DateUpdate)</td>
+        </tr>
+        <tr>
+            <td class="other">Last Update By</td>
+            <td>@Html.DisplayFor(model => model.UserUpdate)</td>
+        </tr>
+    </table>
+</fieldset>
+@using (Html.BeginForm()) {
+    <div style="margin:20px auto">
+        <input type="submit" value="Delete" style="float:left" />
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "others", style = "float:left" })
+    </div>
+}

@@ -1,0 +1,17 @@
+﻿@model PapayaX2.Models.LoginModel
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if(TempData["Notification"] != null)
+{
+    @Html.Raw(TempData["Notification"].ToString());
+}
+
+<div style="position:relative;top:50px">
+    <h2 style="text-align:center;font-size:50px">Welcome</h2>
+    <h2 style="text-align:center;font-size:50px">@User.Identity.Name</h2>
+    <p>@ViewData["Error_Message"]</p>
+</div>

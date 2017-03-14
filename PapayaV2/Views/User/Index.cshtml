@@ -1,0 +1,103 @@
+﻿@model IEnumerable<PapayaX2.Database.rs_user>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#search").DefaultValue("Search");
+
+        $("a.printSmall").click(function () {
+            $("#loadingScreen").html("<div id='lightbox' class='loading'></div>");
+            $("#lightbox.loading").fadeIn(300);
+        });
+
+        //used by ParserInfoHelper
+        $("#settings-tabs li a").click(function (event) {
+            if (!$(this).parent().hasClass("selected")) {
+                $("#settings-tabs li.selected").removeClass("selected");
+                $(this).parent().addClass("selected");
+                var left = $("#settings-tabs-content").scrollLeft() + $($(this).attr("href")).position().left;
+                $("#settings-tabs-content").animate({ scrollLeft: left }, "slow");
+            }
+            event.preventDefault();
+        });
+    });
+</script>
+
+@{
+    ViewBag.Title = ViewBag.ModuleName + " - List";
+}
+
+<h2>@ViewBag.ModuleName - List</h2>
+
+@if (TempData["Notification"] != null)
+{
+    @Html.Raw(TempData["Notification"].ToString());
+}
+
+<div>
+    <div style="float:left">
+        @Html.ActionLink(" ", "Create", null, new { @class = "create", title = "Create New" })
+        @Html.ActionLink(" ", "Upload", null, new { @class = "upload", title = "Upload" })
+        @Html.ActionLink(" ", "DownloadTemplate", null, new { @class = "template", title = "Download Template" })
+    </div>
+    <li id="searchbox">
+        @using (Html.BeginForm())
+        {
+            <div class="searchbox">
+                @Html.TextBox("search", (string)ViewBag.search, new { id = "search" })
+                <input type="submit" value="Search" />                
+            </div>
+        }
+    </li>
+    <br />
+    <br />
+    <br />
+</div>
+
+<table class="index">
+    <tr>
+        <th>
+            Username
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Active
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+@if (Model.Count() > 0)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlagActive)
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Edit", new { id = item.UserId }, new { @class = "edit", title = "Edit" })
+                @Html.ActionLink(" ", "Delete", new { id = item.UserId }, new { @class = "delete", title = "Delete" })
+                @Html.ActionLink(" ", "Details", new { id = item.UserId }, new { @class = "detail", title = "Details" })
+                @Html.ActionLink(" ", "Reset", new { id = item.UserId }, new { @class = "resetpassword", title = "Reset Password" })
+                @*@Html.ActionLink(" ", "Print", new { id = item.UserId }, new { @class = "printSmall", title = "Print Barcode" })*@
+            </td>
+        </tr>
+    }
+}
+else
+{
+    <tr>
+        <td colspan="4">No user data found !</td>
+    </tr>
+}
+
+</table>

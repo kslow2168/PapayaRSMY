@@ -1,0 +1,1113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PapayaDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<<<<<<< .mine
+  <EntityType Name="rs_accessories">
+||||||| .r5
+  <EntityType Name="se_action">
+=======
+  <EntityType Name="rs_action">
+>>>>>>> .r12
+    <Key>
+      <PropertyRef Name="AccId" />
+    </Key>
+    <Property Name="AccId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AssetId" Type="int" Nullable="false" />
+    <Property Name="Accessories" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Remarks" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="rs_action">
+    <Key>
+      <PropertyRef Name="ActionId" />
+    </Key>
+    <Property Name="ActionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ModuleId" Type="int" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="FlagActive" Type="bit" Nullable="false" />
+    <Property Name="UserEntry" Type="varchar" MaxLength="30" />
+    <Property Name="DateEntry" Type="datetime" />
+    <Property Name="UserUpdate" Type="varchar" MaxLength="30" />
+    <Property Name="DateUpdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="rs_assets">
+    <Key>
+<<<<<<< .mine
+      <PropertyRef Name="AssetId" />
+    </Key>
+    <Property Name="AssetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentId" Type="int" Nullable="false" />
+    <Property Name="Brand" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Desciption" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="SerialNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MaterialNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="HardwareOpt" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="SoftwareOpt" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="HardwareVer" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="SoftwareVer" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="LicenseExpiry" Type="date" />
+    <Property Name="Accessories" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Remarks" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="PurchaseDate" Type="date" Nullable="false" />
+    <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="DecomDate" Type="date" />
+    <Property Name="DecomReason" Type="varchar" MaxLength="255" />
+    <Property Name="Tagged" Type="bit" Nullable="false" />
+    <Property Name="Damaged" Type="bit" Nullable="false" />
+    <Property Name="LastCalibrated" Type="date" />
+    <Property Name="CalibrationCycle" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="OwnedBy" Type="int" Nullable="false" />
+    <Property Name="TrackingNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ReadyToSell" Type="bit" Nullable="false" />
+    <Property Name="Availability" Type="int" Nullable="false" />
+    <Property Name="OriginLocId" Type="int" Nullable="false" />
+    <Property Name="CurrentLocId" Type="int" Nullable="false" />
+    <Property Name="PurchasePO" Type="varchar" MaxLength="50" />
+    <Property Name="DepreciationFormula" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="ImageLink" Type="varchar" MaxLength="255" />
+    <Property Name="ViewedStats" Type="bigint" Nullable="false" />
+    <Property Name="BookingStats" Type="bigint" Nullable="false" />
+    <Property Name="FeaturedOrder" Type="int" Nullable="false" />
+    <Property Name="Featured" Type="bit" Nullable="false" />
+    <Property Name="IsSystem" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rs_assets_rel">
+    <Key>
+      <PropertyRef Name="RelationId" />
+    </Key>
+    <Property Name="RelationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SysId" Type="int" Nullable="false" />
+    <Property Name="AssetId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rs_bookings">
+    <Key>
+      <PropertyRef Name="BookId" />
+    </Key>
+    <Property Name="BookId" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" Nullable="false" />
+    <Property Name="ExtendedDate" Type="date" />
+    <Property Name="Extended" Type="bit" Nullable="false" />
+    <Property Name="Approved" Type="bit" Nullable="false" />
+    <Property Name="BookAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+    <Property Name="ResquestorId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ApproverId" Type="int" Nullable="false" />
+    <Property Name="AssetId" Type="int" Nullable="false" />
+    <Property Name="Remarks" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Purpose" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Returned" Type="bit" Nullable="false" />
+    <Property Name="ReturnDate" Type="date" />
+    <Property Name="LoanLocationId" Type="int" Nullable="false" />
+    <Property Name="ReturnLocationId" Type="int" Nullable="false" />
+    <Property Name="Damaged" Type="bit" Nullable="false" />
+    <Property Name="LoanFormId" Type="int" Nullable="false" />
+    <Property Name="VerifyBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rs_bookstats">
+    <Key>
+      <PropertyRef Name="StatsId" />
+    </Key>
+    <Property Name="StatsId" Type="int" Nullable="false" />
+    <Property Name="DateId" Type="int" Nullable="false" />
+    <Property Name="AssetId" Type="int" Nullable="false" />
+    <Property Name="Actions" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookingCounts" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rs_company">
+    <Key>
+||||||| .r5
+=======
+      <PropertyRef Name="AssetId" />
+    </Key>
+    <Property Name="AssetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentId" Type="int" Nullable="false" />
+    <Property Name="Brand" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Desciption" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="SerialNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MaterialNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="HardwareOpt" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="SoftwareOpt" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="HardwareVer" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="SoftwareVer" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="LicenseExpiry" Type="date" />
+    <Property Name="Accessories" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Remarks" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="PurchaseDate" Type="date" Nullable="false" />
+    <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="DecomDate" Type="date" />
+    <Property Name="DecomReason" Type="varchar" MaxLength="255" />
+    <Property Name="Tagged" Type="bit" Nullable="false" />
+    <Property Name="Damaged" Type="bit" Nullable="false" />
+    <Property Name="LastCalibrated" Type="date" />
+    <Property Name="CalibrationCycle" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="OwnedBy" Type="int" />
+    <Property Name="TrackingNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ReadyToSell" Type="bit" Nullable="false" />
+    <Property Name="Availability" Type="int" Nullable="false" />
+    <Property Name="OriginLocId" Type="int" Nullable="false" />
+    <Property Name="CurrentLocId" Type="int" Nullable="false" />
+    <Property Name="PurchasePO" Type="varchar" MaxLength="50" />
+    <Property Name="DepreciationFormula" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="ImageLink" Type="varchar" MaxLength="255" />
+    <Property Name="ViewedStats" Type="bigint" Nullable="false" />
+    <Property Name="BookingStats" Type="bigint" Nullable="false" />
+    <Property Name="FeaturedOrder" Type="int" Nullable="false" />
+    <Property Name="Featured" Type="bit" Nullable="false" />
+    <Property Name="IsSystem" Type="bit" />
+  </EntityType>
+  <EntityType Name="rs_bookings">
+    <Key>
+      <PropertyRef Name="BookId" />
+    </Key>
+    <Property Name="BookId" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" Nullable="false" />
+    <Property Name="ExtendedDate" Type="date" />
+    <Property Name="Extended" Type="bit" Nullable="false" />
+    <Property Name="Approved" Type="bit" Nullable="false" />
+    <Property Name="BookAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+    <Property Name="ResquestorId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ApproverId" Type="int" Nullable="false" />
+    <Property Name="AssetId" Type="int" Nullable="false" />
+    <Property Name="Remarks" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Purpose" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Returned" Type="bit" Nullable="false" />
+    <Property Name="ReturnDate" Type="date" />
+    <Property Name="LoanLocationId" Type="int" Nullable="false" />
+    <Property Name="ReturnLocationId" Type="int" Nullable="false" />
+    <Property Name="Damaged" Type="bit" Nullable="false" />
+    <Property Name="LoanFormId" Type="int" Nullable="false" />
+    <Property Name="VerifyBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rs_bookstats">
+    <Key>
+      <PropertyRef Name="StatsId" />
+    </Key>
+    <Property Name="StatsId" Type="int" Nullable="false" />
+    <Property Name="DateId" Type="int" Nullable="false" />
+    <Property Name="AssetId" Type="int" Nullable="false" />
+    <Property Name="Actions" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookingCounts" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rs_company">
+    <Key>
+>>>>>>> .r12
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyCode" Type="varchar" MaxLength="20" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar" MaxLength="200" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+    <Property Name="FaxNumber" Type="varchar" MaxLength="20" />
+    <Property Name="CompanyUrl" Type="varchar" MaxLength="50" />
+    <Property Name="FlagActive" Type="bit" Nullable="false" />
+    <Property Name="UserEntry" Type="varchar" MaxLength="30" />
+    <Property Name="DateEntry" Type="datetime" />
+    <Property Name="UserUpdate" Type="varchar" MaxLength="30" />
+    <Property Name="DateUpdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="rs_dates">
+    <Key>
+      <PropertyRef Name="DateId" />
+    </Key>
+    <Property Name="DateId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Day" Type="int" Nullable="false" />
+    <Property Name="DayOfWeek" Type="int" Nullable="false" />
+    <Property Name="Month" Type="int" Nullable="false" />
+    <Property Name="MonthName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Quarter" Type="int" Nullable="false" />
+    <Property Name="QuarterName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rs_division">
+    <Key>
+      <PropertyRef Name="DivId" />
+    </Key>
+    <Property Name="DivId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DivisionNo" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="MarketSegments" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="rs_loan_form">
+    <Key>
+      <PropertyRef Name="LoanId" />
+    </Key>
+    <Property Name="LoanId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RequestNo" Type="int" Nullable="false" />
+    <Property Name="RequestorId" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" Nullable="false" />
+    <Property Name="Company" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="ContactPersion" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Telephone" Type="varchar" MaxLength="250" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Purpose" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Invalid" Type="bit" Nullable="false" />
+    <Property Name="Returned" Type="bit" Nullable="false" />
+    <Property Name="Signed" Type="bit" Nullable="false" />
+    <Property Name="UploadedFile" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="rs_locations">
+    <Key>
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationName" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="InternalName" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="LocationCode" Type="varchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rs_module">
+    <Key>
+      <PropertyRef Name="ModuleId" />
+    </Key>
+    <Property Name="ModuleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentModuleId" Type="int" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="Controller" Type="varchar" MaxLength="100" />
+    <Property Name="HaveChild" Type="bit" />
+    <Property Name="MenuOrder" Type="int" />
+    <Property Name="ModuleOrder" Type="int" />
+    <Property Name="IsBackEnd" Type="bit" Nullable="false" />
+    <Property Name="FlagActive" Type="bit" Nullable="false" />
+    <Property Name="UserEntry" Type="varchar" MaxLength="30" />
+    <Property Name="DateEntry" Type="datetime" />
+    <Property Name="UserUpdate" Type="varchar" MaxLength="30" />
+    <Property Name="DateUpdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="rs_smslogs">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Name="MessageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReceiverId" Type="int" Nullable="false" />
+    <Property Name="Timestamp" Type="datetime" Nullable="false" />
+    <Property Name="Action" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Message" Type="varchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rs_syslog">
+    <Key>
+      <PropertyRef Name="LogId" />
+    </Key>
+    <Property Name="LogId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClientIP" Type="varchar" MaxLength="20" />
+    <Property Name="Controller" Type="varchar" MaxLength="60" />
+    <Property Name="Action" Type="varchar" MaxLength="60" />
+    <Property Name="Operation" Type="varchar" MaxLength="20" />
+    <Property Name="Description" Type="varchar" MaxLength="100" />
+    <Property Name="User" Type="varchar" MaxLength="20" />
+    <Property Name="LogTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="rs_user">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="32" Nullable="false" />
+    <Property Name="FullName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MobileNumber" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+    <Property Name="UserType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsBackEnd" Type="bit" Nullable="false" />
+    <Property Name="FlagActive" Type="bit" Nullable="false" />
+    <Property Name="UserEntry" Type="varchar" MaxLength="30" />
+    <Property Name="DateEntry" Type="datetime" />
+    <Property Name="UserUpdate" Type="varchar" MaxLength="30" />
+    <Property Name="DateUpdate" Type="datetime" />
+    <Property Name="DivId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rs_user_group">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="GroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="FlagActive" Type="bit" Nullable="false" />
+    <Property Name="UserEntry" Type="varchar" MaxLength="30" />
+    <Property Name="DateEntry" Type="datetime" />
+    <Property Name="UserUpdate" Type="varchar" MaxLength="30" />
+    <Property Name="DateUpdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="rs_useracl">
+    <Key>
+      <PropertyRef Name="UserAclId" />
+    </Key>
+    <Property Name="UserAclId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupId" Type="int" />
+    <Property Name="ActionId" Type="int" />
+    <Property Name="FlagActive" Type="bit" Nullable="false" />
+    <Property Name="UserEntry" Type="varchar" MaxLength="30" />
+    <Property Name="DateEntry" Type="datetime" />
+    <Property Name="UserUpdate" Type="varchar" MaxLength="30" />
+    <Property Name="DateUpdate" Type="datetime" />
+  </EntityType>
+<<<<<<< .mine
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK__se_action__Modul__3C34F16F">
+    <End Role="rs_module" Type="Self.rs_module" Multiplicity="0..1" />
+    <End Role="rs_action" Type="Self.rs_action" Multiplicity="*" />
+||||||| .r5
+  <Association Name="FK__se_action__Modul__3C34F16F">
+    <End Role="se_module" Type="Self.se_module" Multiplicity="0..1" />
+    <End Role="se_action" Type="Self.se_action" Multiplicity="*" />
+=======
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK__rs_action__Modul__3C34F16F">
+    <End Role="rs_module" Type="Self.rs_module" Multiplicity="0..1" />
+    <End Role="rs_action" Type="Self.rs_action" Multiplicity="*" />
+>>>>>>> .r12
+    <ReferentialConstraint>
+      <Principal Role="rs_module">
+        <PropertyRef Name="ModuleId" />
+      </Principal>
+      <Dependent Role="rs_action">
+        <PropertyRef Name="ModuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+<<<<<<< .mine
+  <Association Name="FK__se_module__Paren__3D2915A8">
+    <End Role="rs_module" Type="Self.rs_module" Multiplicity="0..1" />
+    <End Role="rs_module1" Type="Self.rs_module" Multiplicity="*" />
+||||||| .r5
+  <Association Name="FK__se_module__Paren__3D2915A8">
+    <End Role="se_module" Type="Self.se_module" Multiplicity="0..1" />
+    <End Role="se_module1" Type="Self.se_module" Multiplicity="*" />
+=======
+  <Association Name="FK__rs_module__Paren__3D2915A8">
+    <End Role="rs_module" Type="Self.rs_module" Multiplicity="0..1" />
+    <End Role="rs_module1" Type="Self.rs_module" Multiplicity="*" />
+>>>>>>> .r12
+    <ReferentialConstraint>
+      <Principal Role="rs_module">
+        <PropertyRef Name="ModuleId" />
+      </Principal>
+      <Dependent Role="rs_module1">
+        <PropertyRef Name="ParentModuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+<<<<<<< .mine
+  <Association Name="FK__se_userac__Actio__3C69FB99">
+    <End Role="rs_action" Type="Self.rs_action" Multiplicity="0..1" />
+    <End Role="rs_useracl" Type="Self.rs_useracl" Multiplicity="*" />
+||||||| .r5
+  <Association Name="FK__se_user__Company__3B75D760">
+    <End Role="se_company" Type="Self.se_company" Multiplicity="0..1" />
+    <End Role="se_user" Type="Self.se_user" Multiplicity="*" />
+=======
+  <Association Name="FK__rs_userac__Actio__3C69FB99">
+    <End Role="rs_action" Type="Self.rs_action" Multiplicity="0..1" />
+    <End Role="rs_useracl" Type="Self.rs_useracl" Multiplicity="*" />
+>>>>>>> .r12
+    <ReferentialConstraint>
+      <Principal Role="rs_action">
+        <PropertyRef Name="ActionId" />
+      </Principal>
+      <Dependent Role="rs_useracl">
+        <PropertyRef Name="ActionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+<<<<<<< .mine
+  <Association Name="FK_AssetRelation_Asset">
+    <End Role="rs_assets" Type="Self.rs_assets" Multiplicity="1" />
+    <End Role="rs_assets_rel" Type="Self.rs_assets_rel" Multiplicity="*" />
+||||||| .r5
+  <Association Name="FK__se_userac__Actio__3C69FB99">
+    <End Role="se_action" Type="Self.se_action" Multiplicity="0..1" />
+    <End Role="se_useracl" Type="Self.se_useracl" Multiplicity="*" />
+=======
+  <Association Name="FK_se_assets_se_locations">
+    <End Role="rs_locations" Type="Self.rs_locations" Multiplicity="1" />
+    <End Role="rs_assets" Type="Self.rs_assets" Multiplicity="*" />
+>>>>>>> .r12
+    <ReferentialConstraint>
+<<<<<<< .mine
+      <Principal Role="rs_assets">
+        <PropertyRef Name="AssetId" />
+||||||| .r5
+      <Principal Role="se_action">
+        <PropertyRef Name="ActionId" />
+=======
+      <Principal Role="rs_locations">
+        <PropertyRef Name="LocationId" />
+>>>>>>> .r12
+      </Principal>
+<<<<<<< .mine
+      <Dependent Role="rs_assets_rel">
+        <PropertyRef Name="AssetId" />
+||||||| .r5
+      <Dependent Role="se_useracl">
+        <PropertyRef Name="ActionId" />
+=======
+      <Dependent Role="rs_assets">
+        <PropertyRef Name="OriginLocId" />
+>>>>>>> .r12
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+<<<<<<< .mine
+  <Association Name="FK_AssetRelation_System">
+    <End Role="rs_assets" Type="Self.rs_assets" Multiplicity="1" />
+    <End Role="rs_assets_rel" Type="Self.rs_assets_rel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_assets">
+        <PropertyRef Name="AssetId" />
+      </Principal>
+      <Dependent Role="rs_assets_rel">
+        <PropertyRef Name="SysId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_rs_accessories_rs_assets">
+    <End Role="rs_assets" Type="Self.rs_assets" Multiplicity="1" />
+    <End Role="rs_accessories" Type="Self.rs_accessories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_assets">
+        <PropertyRef Name="AssetId" />
+      </Principal>
+      <Dependent Role="rs_accessories">
+        <PropertyRef Name="AssetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_rs_assets_rs_user">
+    <End Role="rs_user" Type="Self.rs_user" Multiplicity="1" />
+    <End Role="rs_assets" Type="Self.rs_assets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_user">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="rs_assets">
+        <PropertyRef Name="OwnedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_assets_se_locations">
+    <End Role="rs_locations" Type="Self.rs_locations" Multiplicity="1" />
+    <End Role="rs_assets" Type="Self.rs_assets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_locations">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="rs_assets">
+        <PropertyRef Name="OriginLocId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_assets_se_locations1">
+    <End Role="rs_locations" Type="Self.rs_locations" Multiplicity="1" />
+    <End Role="rs_assets" Type="Self.rs_assets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_locations">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="rs_assets">
+        <PropertyRef Name="CurrentLocId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_bookings_se_assets">
+    <End Role="rs_assets" Type="Self.rs_assets" Multiplicity="1" />
+    <End Role="rs_bookings" Type="Self.rs_bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_assets">
+        <PropertyRef Name="AssetId" />
+      </Principal>
+      <Dependent Role="rs_bookings">
+        <PropertyRef Name="AssetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_bookings_se_loan_form">
+    <End Role="rs_loan_form" Type="Self.rs_loan_form" Multiplicity="1" />
+    <End Role="rs_bookings" Type="Self.rs_bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_loan_form">
+        <PropertyRef Name="LoanId" />
+      </Principal>
+      <Dependent Role="rs_bookings">
+        <PropertyRef Name="LoanFormId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_bookings_se_user">
+    <End Role="rs_user" Type="Self.rs_user" Multiplicity="1" />
+    <End Role="rs_bookings" Type="Self.rs_bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_user">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="rs_bookings">
+        <PropertyRef Name="ApproverId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_bookings_se_user1">
+    <End Role="rs_user" Type="Self.rs_user" Multiplicity="1" />
+    <End Role="rs_bookings" Type="Self.rs_bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_user">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="rs_bookings">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_bookings_se_user2">
+    <End Role="rs_user" Type="Self.rs_user" Multiplicity="1" />
+    <End Role="rs_bookings" Type="Self.rs_bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_user">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="rs_bookings">
+        <PropertyRef Name="ResquestorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_bookings_se_user3">
+    <End Role="rs_user" Type="Self.rs_user" Multiplicity="1" />
+    <End Role="rs_bookings" Type="Self.rs_bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_user">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="rs_bookings">
+        <PropertyRef Name="VerifyBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_bookstats_se_assets">
+    <End Role="rs_assets" Type="Self.rs_assets" Multiplicity="1" />
+    <End Role="rs_bookstats" Type="Self.rs_bookstats" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_assets">
+        <PropertyRef Name="AssetId" />
+      </Principal>
+      <Dependent Role="rs_bookstats">
+        <PropertyRef Name="AssetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_bookstats_se_dates">
+    <End Role="rs_dates" Type="Self.rs_dates" Multiplicity="1" />
+    <End Role="rs_bookstats" Type="Self.rs_bookstats" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_dates">
+        <PropertyRef Name="DateId" />
+      </Principal>
+      <Dependent Role="rs_bookstats">
+        <PropertyRef Name="DateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_smslogs_se_user">
+    <End Role="rs_user" Type="Self.rs_user" Multiplicity="1" />
+    <End Role="rs_smslogs" Type="Self.rs_smslogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_user">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="rs_smslogs">
+        <PropertyRef Name="ReceiverId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_user_se_division">
+    <End Role="rs_division" Type="Self.rs_division" Multiplicity="1" />
+    <End Role="rs_user" Type="Self.rs_user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_division">
+        <PropertyRef Name="DivId" />
+      </Principal>
+      <Dependent Role="rs_user">
+        <PropertyRef Name="DivId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_user_se_user_group">
+    <End Role="rs_user_group" Type="Self.rs_user_group" Multiplicity="1" />
+    <End Role="rs_user" Type="Self.rs_user" Multiplicity="*" />
+||||||| .r5
+  <Association Name="FK_se_user_se_user_group">
+    <End Role="se_user_group" Type="Self.se_user_group" Multiplicity="0..1" />
+    <End Role="se_user" Type="Self.se_user" Multiplicity="*" />
+=======
+  <Association Name="FK_se_assets_se_locations1">
+    <End Role="rs_locations" Type="Self.rs_locations" Multiplicity="1" />
+    <End Role="rs_assets" Type="Self.rs_assets" Multiplicity="*" />
+>>>>>>> .r12
+    <ReferentialConstraint>
+<<<<<<< .mine
+      <Principal Role="rs_user_group">
+||||||| .r5
+      <Principal Role="se_user_group">
+=======
+      <Principal Role="rs_locations">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="rs_assets">
+        <PropertyRef Name="CurrentLocId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_bookings_se_assets">
+    <End Role="rs_assets" Type="Self.rs_assets" Multiplicity="1" />
+    <End Role="rs_bookings" Type="Self.rs_bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_assets">
+        <PropertyRef Name="AssetId" />
+      </Principal>
+      <Dependent Role="rs_bookings">
+        <PropertyRef Name="AssetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_bookings_se_loan_form">
+    <End Role="rs_loan_form" Type="Self.rs_loan_form" Multiplicity="1" />
+    <End Role="rs_bookings" Type="Self.rs_bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_loan_form">
+        <PropertyRef Name="LoanId" />
+      </Principal>
+      <Dependent Role="rs_bookings">
+        <PropertyRef Name="LoanFormId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_bookings_rs_user">
+    <End Role="rs_user" Type="Self.rs_user" Multiplicity="1" />
+    <End Role="rs_bookings" Type="Self.rs_bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_user">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="rs_bookings">
+        <PropertyRef Name="ApproverId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_bookings_rs_user1">
+    <End Role="rs_user" Type="Self.rs_user" Multiplicity="1" />
+    <End Role="rs_bookings" Type="Self.rs_bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_user">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="rs_bookings">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_bookings_rs_user2">
+    <End Role="rs_user" Type="Self.rs_user" Multiplicity="1" />
+    <End Role="rs_bookings" Type="Self.rs_bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_user">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="rs_bookings">
+        <PropertyRef Name="ResquestorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_bookings_rs_user3">
+    <End Role="rs_user" Type="Self.rs_user" Multiplicity="1" />
+    <End Role="rs_bookings" Type="Self.rs_bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_user">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="rs_bookings">
+        <PropertyRef Name="VerifyBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_bookstats_se_assets">
+    <End Role="rs_assets" Type="Self.rs_assets" Multiplicity="1" />
+    <End Role="rs_bookstats" Type="Self.rs_bookstats" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_assets">
+        <PropertyRef Name="AssetId" />
+      </Principal>
+      <Dependent Role="rs_bookstats">
+        <PropertyRef Name="AssetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_bookstats_se_dates">
+    <End Role="rs_dates" Type="Self.rs_dates" Multiplicity="1" />
+    <End Role="rs_bookstats" Type="Self.rs_bookstats" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_dates">
+        <PropertyRef Name="DateId" />
+      </Principal>
+      <Dependent Role="rs_bookstats">
+        <PropertyRef Name="DateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_se_smslogs_rs_user">
+    <End Role="rs_user" Type="Self.rs_user" Multiplicity="1" />
+    <End Role="rs_smslogs" Type="Self.rs_smslogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_user">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="rs_smslogs">
+        <PropertyRef Name="ReceiverId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_rs_user_se_division">
+    <End Role="rs_division" Type="Self.rs_division" Multiplicity="1" />
+    <End Role="rs_user" Type="Self.rs_user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_division">
+        <PropertyRef Name="DivId" />
+      </Principal>
+      <Dependent Role="rs_user">
+        <PropertyRef Name="DivId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_rs_user_rs_user_group">
+    <End Role="rs_user_group" Type="Self.rs_user_group" Multiplicity="1" />
+    <End Role="rs_user" Type="Self.rs_user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rs_user_group">
+>>>>>>> .r12
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="rs_user">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+<<<<<<< .mine
+  <Association Name="FK_se_useracl_se_user_group">
+    <End Role="rs_user_group" Type="Self.rs_user_group" Multiplicity="0..1" />
+    <End Role="rs_useracl" Type="Self.rs_useracl" Multiplicity="*" />
+||||||| .r5
+  <Association Name="FK_se_useracl_se_user_group">
+    <End Role="se_user_group" Type="Self.se_user_group" Multiplicity="0..1" />
+    <End Role="se_useracl" Type="Self.se_useracl" Multiplicity="*" />
+=======
+  <Association Name="FK_rs_useracl_rs_user_group">
+    <End Role="rs_user_group" Type="Self.rs_user_group" Multiplicity="0..1" />
+    <End Role="rs_useracl" Type="Self.rs_useracl" Multiplicity="*" />
+>>>>>>> .r12
+    <ReferentialConstraint>
+      <Principal Role="rs_user_group">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="rs_useracl">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="PapayaDBStoreContainer">
+<<<<<<< .mine
+    <EntitySet Name="rs_accessories" EntityType="Self.rs_accessories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_action" EntityType="Self.rs_action" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_assets" EntityType="Self.rs_assets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_assets_rel" EntityType="Self.rs_assets_rel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_bookings" EntityType="Self.rs_bookings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_bookstats" EntityType="Self.rs_bookstats" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_company" EntityType="Self.rs_company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_dates" EntityType="Self.rs_dates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_division" EntityType="Self.rs_division" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_loan_form" EntityType="Self.rs_loan_form" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_locations" EntityType="Self.rs_locations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_module" EntityType="Self.rs_module" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_smslogs" EntityType="Self.rs_smslogs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_syslog" EntityType="Self.rs_syslog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_user" EntityType="Self.rs_user" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_user_group" EntityType="Self.rs_user_group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_useracl" EntityType="Self.rs_useracl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__se_action__Modul__3C34F16F" Association="Self.FK__se_action__Modul__3C34F16F">
+      <End Role="rs_module" EntitySet="rs_module" />
+      <End Role="rs_action" EntitySet="rs_action" />
+||||||| .r5
+    <EntitySet Name="se_action" EntityType="Self.se_action" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="se_company" EntityType="Self.se_company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="se_module" EntityType="Self.se_module" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="se_syslog" EntityType="Self.se_syslog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="se_user" EntityType="Self.se_user" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="se_user_group" EntityType="Self.se_user_group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="se_useracl" EntityType="Self.se_useracl" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__se_action__Modul__3C34F16F" Association="Self.FK__se_action__Modul__3C34F16F">
+      <End Role="se_module" EntitySet="se_module" />
+      <End Role="se_action" EntitySet="se_action" />
+=======
+    <EntitySet Name="rs_action" EntityType="Self.rs_action" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_assets" EntityType="Self.rs_assets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_bookings" EntityType="Self.rs_bookings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_bookstats" EntityType="Self.rs_bookstats" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_company" EntityType="Self.rs_company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_dates" EntityType="Self.rs_dates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_division" EntityType="Self.rs_division" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_loan_form" EntityType="Self.rs_loan_form" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_locations" EntityType="Self.rs_locations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_module" EntityType="Self.rs_module" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_smslogs" EntityType="Self.rs_smslogs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_syslog" EntityType="Self.rs_syslog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_user" EntityType="Self.rs_user" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_user_group" EntityType="Self.rs_user_group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rs_useracl" EntityType="Self.rs_useracl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__rs_action__Modul__3C34F16F" Association="Self.FK__rs_action__Modul__3C34F16F">
+      <End Role="rs_module" EntitySet="rs_module" />
+      <End Role="rs_action" EntitySet="rs_action" />
+>>>>>>> .r12
+    </AssociationSet>
+<<<<<<< .mine
+    <AssociationSet Name="FK__se_module__Paren__3D2915A8" Association="Self.FK__se_module__Paren__3D2915A8">
+      <End Role="rs_module" EntitySet="rs_module" />
+      <End Role="rs_module1" EntitySet="rs_module" />
+||||||| .r5
+    <AssociationSet Name="FK__se_module__Paren__3D2915A8" Association="Self.FK__se_module__Paren__3D2915A8">
+      <End Role="se_module" EntitySet="se_module" />
+      <End Role="se_module1" EntitySet="se_module" />
+=======
+    <AssociationSet Name="FK__rs_module__Paren__3D2915A8" Association="Self.FK__rs_module__Paren__3D2915A8">
+      <End Role="rs_module" EntitySet="rs_module" />
+      <End Role="rs_module1" EntitySet="rs_module" />
+>>>>>>> .r12
+    </AssociationSet>
+<<<<<<< .mine
+||||||| .r5
+    <AssociationSet Name="FK__se_user__Company__3B75D760" Association="Self.FK__se_user__Company__3B75D760">
+      <End Role="se_company" EntitySet="se_company" />
+      <End Role="se_user" EntitySet="se_user" />
+    </AssociationSet>
+=======
+    <AssociationSet Name="FK__rs_userac__Actio__3C69FB99" Association="Self.FK__rs_userac__Actio__3C69FB99">
+      <End Role="rs_action" EntitySet="rs_action" />
+      <End Role="rs_useracl" EntitySet="rs_useracl" />
+    </AssociationSet>
+>>>>>>> .r12
+<<<<<<< .mine
+    <AssociationSet Name="FK__se_userac__Actio__3C69FB99" Association="Self.FK__se_userac__Actio__3C69FB99">
+      <End Role="rs_action" EntitySet="rs_action" />
+      <End Role="rs_useracl" EntitySet="rs_useracl" />
+||||||| .r5
+    <AssociationSet Name="FK__se_userac__Actio__3C69FB99" Association="Self.FK__se_userac__Actio__3C69FB99">
+      <End Role="se_action" EntitySet="se_action" />
+      <End Role="se_useracl" EntitySet="se_useracl" />
+=======
+    <AssociationSet Name="FK_se_assets_se_locations" Association="Self.FK_se_assets_se_locations">
+      <End Role="rs_locations" EntitySet="rs_locations" />
+      <End Role="rs_assets" EntitySet="rs_assets" />
+>>>>>>> .r12
+    </AssociationSet>
+<<<<<<< .mine
+    <AssociationSet Name="FK_AssetRelation_Asset" Association="Self.FK_AssetRelation_Asset">
+      <End Role="rs_assets" EntitySet="rs_assets" />
+      <End Role="rs_assets_rel" EntitySet="rs_assets_rel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetRelation_System" Association="Self.FK_AssetRelation_System">
+      <End Role="rs_assets" EntitySet="rs_assets" />
+      <End Role="rs_assets_rel" EntitySet="rs_assets_rel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_rs_accessories_rs_assets" Association="Self.FK_rs_accessories_rs_assets">
+      <End Role="rs_assets" EntitySet="rs_assets" />
+      <End Role="rs_accessories" EntitySet="rs_accessories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_rs_assets_rs_user" Association="Self.FK_rs_assets_rs_user">
+      <End Role="rs_user" EntitySet="rs_user" />
+      <End Role="rs_assets" EntitySet="rs_assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_assets_se_locations" Association="Self.FK_se_assets_se_locations">
+      <End Role="rs_locations" EntitySet="rs_locations" />
+      <End Role="rs_assets" EntitySet="rs_assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_assets_se_locations1" Association="Self.FK_se_assets_se_locations1">
+      <End Role="rs_locations" EntitySet="rs_locations" />
+      <End Role="rs_assets" EntitySet="rs_assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_bookings_se_assets" Association="Self.FK_se_bookings_se_assets">
+      <End Role="rs_assets" EntitySet="rs_assets" />
+      <End Role="rs_bookings" EntitySet="rs_bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_bookings_se_loan_form" Association="Self.FK_se_bookings_se_loan_form">
+      <End Role="rs_loan_form" EntitySet="rs_loan_form" />
+      <End Role="rs_bookings" EntitySet="rs_bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_bookings_se_user" Association="Self.FK_se_bookings_se_user">
+      <End Role="rs_user" EntitySet="rs_user" />
+      <End Role="rs_bookings" EntitySet="rs_bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_bookings_se_user1" Association="Self.FK_se_bookings_se_user1">
+      <End Role="rs_user" EntitySet="rs_user" />
+      <End Role="rs_bookings" EntitySet="rs_bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_bookings_se_user2" Association="Self.FK_se_bookings_se_user2">
+      <End Role="rs_user" EntitySet="rs_user" />
+      <End Role="rs_bookings" EntitySet="rs_bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_bookings_se_user3" Association="Self.FK_se_bookings_se_user3">
+      <End Role="rs_user" EntitySet="rs_user" />
+      <End Role="rs_bookings" EntitySet="rs_bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_bookstats_se_assets" Association="Self.FK_se_bookstats_se_assets">
+      <End Role="rs_assets" EntitySet="rs_assets" />
+      <End Role="rs_bookstats" EntitySet="rs_bookstats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_bookstats_se_dates" Association="Self.FK_se_bookstats_se_dates">
+      <End Role="rs_dates" EntitySet="rs_dates" />
+      <End Role="rs_bookstats" EntitySet="rs_bookstats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_smslogs_se_user" Association="Self.FK_se_smslogs_se_user">
+      <End Role="rs_user" EntitySet="rs_user" />
+      <End Role="rs_smslogs" EntitySet="rs_smslogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_user_se_division" Association="Self.FK_se_user_se_division">
+      <End Role="rs_division" EntitySet="rs_division" />
+      <End Role="rs_user" EntitySet="rs_user" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_user_se_user_group" Association="Self.FK_se_user_se_user_group">
+      <End Role="rs_user_group" EntitySet="rs_user_group" />
+      <End Role="rs_user" EntitySet="rs_user" />
+||||||| .r5
+    <AssociationSet Name="FK_se_user_se_user_group" Association="Self.FK_se_user_se_user_group">
+      <End Role="se_user_group" EntitySet="se_user_group" />
+      <End Role="se_user" EntitySet="se_user" />
+=======
+    <AssociationSet Name="FK_se_assets_se_locations1" Association="Self.FK_se_assets_se_locations1">
+      <End Role="rs_locations" EntitySet="rs_locations" />
+      <End Role="rs_assets" EntitySet="rs_assets" />
+>>>>>>> .r12
+    </AssociationSet>
+<<<<<<< .mine
+    <AssociationSet Name="FK_se_useracl_se_user_group" Association="Self.FK_se_useracl_se_user_group">
+      <End Role="rs_user_group" EntitySet="rs_user_group" />
+      <End Role="rs_useracl" EntitySet="rs_useracl" />
+||||||| .r5
+    <AssociationSet Name="FK_se_useracl_se_user_group" Association="Self.FK_se_useracl_se_user_group">
+      <End Role="se_user_group" EntitySet="se_user_group" />
+      <End Role="se_useracl" EntitySet="se_useracl" />
+=======
+    <AssociationSet Name="FK_se_bookings_se_assets" Association="Self.FK_se_bookings_se_assets">
+      <End Role="rs_assets" EntitySet="rs_assets" />
+      <End Role="rs_bookings" EntitySet="rs_bookings" />
+>>>>>>> .r12
+    </AssociationSet>
+    <AssociationSet Name="FK_se_bookings_se_loan_form" Association="Self.FK_se_bookings_se_loan_form">
+      <End Role="rs_loan_form" EntitySet="rs_loan_form" />
+      <End Role="rs_bookings" EntitySet="rs_bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_bookings_rs_user" Association="Self.FK_se_bookings_rs_user">
+      <End Role="rs_user" EntitySet="rs_user" />
+      <End Role="rs_bookings" EntitySet="rs_bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_bookings_rs_user1" Association="Self.FK_se_bookings_rs_user1">
+      <End Role="rs_user" EntitySet="rs_user" />
+      <End Role="rs_bookings" EntitySet="rs_bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_bookings_rs_user2" Association="Self.FK_se_bookings_rs_user2">
+      <End Role="rs_user" EntitySet="rs_user" />
+      <End Role="rs_bookings" EntitySet="rs_bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_bookings_rs_user3" Association="Self.FK_se_bookings_rs_user3">
+      <End Role="rs_user" EntitySet="rs_user" />
+      <End Role="rs_bookings" EntitySet="rs_bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_bookstats_se_assets" Association="Self.FK_se_bookstats_se_assets">
+      <End Role="rs_assets" EntitySet="rs_assets" />
+      <End Role="rs_bookstats" EntitySet="rs_bookstats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_bookstats_se_dates" Association="Self.FK_se_bookstats_se_dates">
+      <End Role="rs_dates" EntitySet="rs_dates" />
+      <End Role="rs_bookstats" EntitySet="rs_bookstats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_se_smslogs_rs_user" Association="Self.FK_se_smslogs_rs_user">
+      <End Role="rs_user" EntitySet="rs_user" />
+      <End Role="rs_smslogs" EntitySet="rs_smslogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_rs_user_se_division" Association="Self.FK_rs_user_se_division">
+      <End Role="rs_division" EntitySet="rs_division" />
+      <End Role="rs_user" EntitySet="rs_user" />
+    </AssociationSet>
+    <AssociationSet Name="FK_rs_user_rs_user_group" Association="Self.FK_rs_user_rs_user_group">
+      <End Role="rs_user_group" EntitySet="rs_user_group" />
+      <End Role="rs_user" EntitySet="rs_user" />
+    </AssociationSet>
+    <AssociationSet Name="FK_rs_useracl_rs_user_group" Association="Self.FK_rs_useracl_rs_user_group">
+      <End Role="rs_user_group" EntitySet="rs_user_group" />
+      <End Role="rs_useracl" EntitySet="rs_useracl" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

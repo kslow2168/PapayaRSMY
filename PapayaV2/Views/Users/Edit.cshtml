@@ -1,0 +1,142 @@
+﻿@model PapayaX2.Database.rs_user
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>rs_user</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.UserId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MobileNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="editor-field">
+                @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GroupId, "GroupId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="editor-field">
+                @Html.DropDownList("GroupId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GroupId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UserType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsBackEnd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="editor-field">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsBackEnd)
+                    @Html.ValidationMessageFor(model => model.IsBackEnd, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FlagActive, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="editor-field">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.FlagActive)
+                    @Html.ValidationMessageFor(model => model.FlagActive, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserEntry, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UserEntry, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserEntry, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateEntry, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="editor-field">
+                @Html.EditorFor(model => model.DateEntry, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateEntry, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserUpdate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UserUpdate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserUpdate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateUpdate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="editor-field">
+                @Html.EditorFor(model => model.DateUpdate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateUpdate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="editor-label">
+            <div class="col-md-offset-2 editor-field">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
