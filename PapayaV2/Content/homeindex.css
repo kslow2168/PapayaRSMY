@@ -1,0 +1,106 @@
+.activity-title,
+.noti-type {
+    padding: 8px 16px 8px 16px !important;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.loan-title,
+.noti-date {
+    padding: 8px 16px 8px 16px !important;
+    font-size: 0.9em;
+}
+
+.noti-support {
+    padding: 0 !important;
+    
+}
+
+.noti-support ul {
+    list-style-type: none;
+    padding: 10px 0 5px 0 !important;
+    margin: 0 !important;
+    font-size: 0.95em;
+    font-weight: 600;
+}
+
+.noti-owner ul {
+    margin: 0 !important;
+    font-weight: 500;
+}
+
+.noti-owner li {
+    display: inline;
+    font-size: 1.1em;
+}
+
+.mdl-card__supporting-text {
+    padding: 0 16px 5px 16px  !important;
+}
+
+.mdl-card__actions {
+    padding: 0 !important;
+}
+
+.noti-button1 {
+    float: left;
+}
+
+.noti-button2 {
+    float: right;
+}
+
+.recent-card ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-weight: 500;
+    font-size: 0.9em;
+    display: list-item !important;
+}
+
+.recent-card {
+    padding: 8px 16px 5px 16px !important;
+}
+
+.recent-owner {
+    height: 100%;
+}
+
+.recent-owner ul {
+    list-style-type: none;
+    padding: 0 !important;
+    margin: 5px 16px;
+}
+
+.recent-owner li {
+    display: inline;
+    font-size: 1em;
+}
+
+.activity-support ul {
+    list-style-type: none;
+    padding: 0 16px;
+    margin: 5px 0 !important;
+    font-weight: 600;
+}
+
+.activity-support ul li ul {
+    font-weight: 500;
+    vertical-align: middle;
+}
+
+.activity-support {
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+.loan-title ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.activity-sec img {
+    margin: 5px auto;
+}

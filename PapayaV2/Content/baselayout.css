@@ -1,0 +1,226 @@
+html {
+    font-family: "Roboto";
+}
+
+.page-content {
+    padding-top: 10px;
+}
+
+@media screen and (max-width: 479px) {
+    .user-wrapper {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1800px) {
+    .page-content {
+        width: 50%;
+        margin: auto !important;
+        min-width: 1000px;
+        max-width: 1200px;
+    }
+}
+
+.search-wrapper {
+    display: inline-block;
+    height: 45px;
+    width: 50%;
+    left: 0;
+    right: 0;
+}
+
+.search-box {
+    outline: none;
+    border: 0;
+    height: 35px;
+    margin: 0;
+    width: calc(100% - 65px);
+    font-size: 15px;
+    color: inherit;
+    background-color: #3d99df;
+    font-weight: 300 !important;
+    font-family: "Roboto";
+    padding: 5px 15px 5px 50px;
+}
+
+.search-button {
+    outline: none;
+    border: 0;
+    color: #f1f1f1;
+    background-color: transparent;
+    float: left;
+    margin: 10px 5px auto 5px !important;
+    padding-bottom: 0 !important;
+    position: absolute;
+}
+
+.header-style,
+.mdl-layout__header-row {
+    min-height: 55px !important;
+    height: 55px !important;
+    vertical-align: middle;
+    background-color: #047ad4 !important;
+}
+
+@media screen and (max-width: 1024px) {
+    .header-style,
+    .mdl-layout__header-row {
+        padding-left: 30px !important;
+    }
+    .mdl-layout__drawer-button {
+        margin: 3px 4px !important;
+        outline: none;
+    }
+    .main-sub-title {
+        margin-right: 10px;
+    }
+    .body-sidebar {
+        display: none;
+    }
+    .search-wrapper {
+        margin-left: 10px;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .mdl-layout__drawer-button {
+        display: none !important;
+    }
+    .header-style,
+    .mdl-layout__header-row {
+        padding: 0 !important;
+    }
+    .main-header-title {
+        padding-left: 25px;
+    }
+    .search-wrapper {
+        position: fixed;
+        margin: auto;
+    }
+    .main-sub-title {
+        max-width: 100px;
+        border-left: solid 1px #f5f5f5;
+        padding-left: 10px;
+    }
+    .page-content {
+        margin-left: 285px;
+    }
+    .user-wrapper {
+        margin-right: 10px !important;
+    }
+}
+
+.main-header-title {
+    font-family: "Roboto";
+    font-size: 1.5em;
+    font-weight: 500;
+    max-width: 150px;
+    padding-right: 20px;
+}
+
+.main-sub-title {
+    font-size: 1.2em;
+    font-weight: 400;
+    white-space: normal;
+    vertical-align: middle;
+}
+
+::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: #cce0ff;
+}
+
+:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #cce0ff;
+    opacity: 1;
+}
+
+::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #cce0ff;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #cce0ff;
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    background: #cce0ff !important;
+}
+
+.body-sidebar {
+    width: 200px;
+    background-color: #f1f1f1;
+    margin: 20px;
+    padding: 30px;
+    height: 80vh;
+    position: fixed;
+}
+
+.body-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.body-sidebar a {
+    color: #024476 !important;
+    font-weight: 600;
+}
+
+.body-sidebar a:hover {
+    color: #0f86e2 !important;
+    font-weight: 600;
+}
+
+.body-sidebar ul li ul {
+    margin: 0;
+    padding: 0 0 0 20px;
+}
+
+.body-sidebar ul li ul li {
+    margin: 0;
+    padding: 0;
+}
+
+.body-sidebar li {
+    padding-bottom: 10px;
+}
+
+.mdl-cell {
+    height: auto !important;
+}
+
+.mdl-card {
+    min-height: 0 !important;
+    min-width: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: auto !important;
+    max-height: auto !important;
+}
+
+.user-icon {
+    background-color: #f1f1f1;
+    color: #000000;
+    font-size: 0.8em !important;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.user-wrapper {
+    margin-left: auto !important
+}
+
+.user-name {
+    padding-right: 5px;
+}
+
+.mdl-menu--bottom-right a {
+    color: black !important;
+    text-decoration: none !important;
+}

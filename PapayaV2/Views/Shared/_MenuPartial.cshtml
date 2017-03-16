@@ -26,17 +26,17 @@ if (hasChild)
 {
     if (level < 2)
     {
-            <li class="dropdown">
+            <li>
                 
                 @if (item.Controller == "Header")
                 {
-                <a href="#" style="padding-left: 15px;">@item.Name <i class="icon-angle-down"></i></a>
+                @item.Name
                 }
                 else
                 {
-                @Html.ActionLink(item.Name, "Index", item.Controller, null, new { @class = "has-child", style = (item.Controller == activeLink) ? "padding-left: 25px; font-weight: 900" : "" })
+                @Html.ActionLink(item.Name, "Index", item.Controller, null, new { @class = "has-child", style = (item.Controller == activeLink) ? "color: blue !important;" : "" })
                 }
-                <ul class="dropdown-menu bold">
+                <ul>
                     @foreach (var child in Model.module.Where(m => m.ParentModuleId == item.ModuleId && m.IsBackEnd == true && m.FlagActive == true).OrderBy(m => m.ModuleOrder))
                     {
                         @GetChild(child, 2)
@@ -46,22 +46,22 @@ if (hasChild)
     }
     else
     {
-            <li class="dropdown">
+            <li>
                
                 @if (item.Controller == "Header")
                 {
-                    <a href="#" style="padding-left: 15px;">@item.Name <i class="icon-angle-right"></i></a>
+                    @item.Name
                 }
                 else
                 {
-                    @Html.ActionLink(item.Name, "Index", item.Controller, null, new { @class = "has-child", style = (item.Controller == activeLink) ? "padding-left: 25px; font-weight: 900" : "" })
+                    @Html.ActionLink(item.Name, "Index", item.Controller, null, new { @class = "has-child", style = (item.Controller == activeLink) ? "color: blue !important;" : "" })
                 }
-                <ul style="display: none;" class="dropdown-menu sub-menu-level1 bold">
-                    @foreach (var child in Model.module.Where(m => m.ParentModuleId == item.ModuleId && m.IsBackEnd == true && m.FlagActive == true).OrderBy(m => m.ModuleOrder))
-                    {
-                        @GetChild(child, 2)
-                    }
-                </ul>
+                
+                @foreach (var child in Model.module.Where(m => m.ParentModuleId == item.ModuleId && m.IsBackEnd == true && m.FlagActive == true).OrderBy(m => m.ModuleOrder))
+                {
+                    @GetChild(child, 2)
+                }
+                
             </li>
     }
 }
@@ -70,11 +70,11 @@ else
             <li>
             @if (item.Controller == "Header")
             {
-                <a href="#" style="padding-left: 15px;">@item.Name</a>
+                @item.Name
                 }
                 else
                 {
-                @Html.ActionLink(item.Name, "Index", item.Controller, null, new { style = (item.Controller == activeLink) ? "padding-left: 25px; font-weight: 900" : "" })
+                @Html.ActionLink(item.Name, "Index", item.Controller, null, new { style = (item.Controller == activeLink) ? "color: blue !important;" : "" })
 
                 }
             </li>
@@ -85,9 +85,9 @@ else
 {
 
     <ul class="nav topnav bold">
-        <li class="dropdown">
-            <a href="#">Welcome @User.Identity.Name <i class="icon-angle-down"></i></a>
-            <ul class="dropdown-menu bold">
+        <li>
+            Hi, @User.Identity.Name
+            <ul>
                 <li><a href="/ChangePassword">Change Password</a></li>
                 <li><a href="/Home/Logout">Logout</a></li>
             </ul>

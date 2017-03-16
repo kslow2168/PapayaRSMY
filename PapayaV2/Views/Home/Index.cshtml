@@ -1,5 +1,9 @@
 ﻿@model PapayaX2.Models.LoginModel
 
+@section Styles {
+    <link href="@Url.Content("~/Content/homeindex.css")" rel="stylesheet" type="text/css" />
+}
+
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,8 +14,444 @@
     @Html.Raw(TempData["Notification"].ToString());
 }
 
-<div style="position:relative;top:50px">
-    <h2 style="text-align:center;font-size:50px">Welcome</h2>
-    <h2 style="text-align:center;font-size:50px">@User.Identity.Name</h2>
-    <p>@ViewData["Error_Message"]</p>
+<div class="mdl-grid">
+    <h5 class="mdl-cell mdl-cell--12-col">Notification</h5>
+    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+        <div class="mdl-card mdl-shadow--2dp">
+            <div class="mdl-shadow--2dp">
+                <div class="mdl-card__title noti-type">
+                    DUE ASSET
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <div class="mdl-card__title noti-date">
+                        due date: 15 Feb 2017
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <div class="mdl-card__supporting-text noti-support">
+                    <ul>
+                        <li>
+                            Digital Radio Communication Tester
+                        </li>
+                        <li>
+                            model: CMD80
+                        </li>
+                        <li>
+                            sn: 849063/014
+                        </li>
+                        <li class="noti-owner">
+                            <ul>
+                                <li>
+                                    <img src="~/Content/Images/pictureplaceholder.png" alt="profile" width="25px" height="25px" style="border-radius: 50%;">
+                                </li>
+                                <li style="vertical-align: middle;">Lewis</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a class="noti-button1 mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Extend
+                </a>
+                <a class="noti-button2 mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Return
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+        <div class="mdl-card mdl-shadow--2dp">
+            <div class="mdl-shadow--2dp">
+                <div class="mdl-card__title noti-type">
+                    DUE ASSET
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <div class="mdl-card__title noti-date">
+                        due date: 15 Feb 2017
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <div class="mdl-card__supporting-text noti-support">
+                    <ul>
+                        <li>
+                            Digital Radio Communication Tester
+                        </li>
+                        <li>
+                            model: CMD80
+                        </li>
+                        <li>
+                            sn: 849063/014
+                        </li>
+                        <li class="noti-owner">
+                            <ul>
+                                <li>
+                                    <img src="~/Content/Images/pictureplaceholder.png" alt="profile" width="25px" height="25px" style="border-radius: 50%;">
+                                </li>
+                                <li style="vertical-align: middle;">Lewis</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a class="noti-button1 mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Extend
+                </a>
+                <a class="noti-button2 mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Return
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+        <div class="mdl-card mdl-shadow--2dp">
+            <div class="mdl-shadow--2dp">
+                <div class="mdl-card__title noti-type">
+                    DUE ASSET
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <div class="mdl-card__title noti-date">
+                        due date: 15 Feb 2017
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <div class="mdl-card__supporting-text noti-support">
+                    <ul>
+                        <li>
+                            Digital Radio Communication Tester
+                        </li>
+                        <li>
+                            model: CMD80
+                        </li>
+                        <li>
+                            sn: 849063/014
+                        </li>
+                        <li class="noti-owner">
+                            <ul>
+                                <li>
+                                    <img src="~/Content/Images/pictureplaceholder.png" alt="profile" width="25px" height="25px" style="border-radius: 50%;">
+                                </li>
+                                <li style="vertical-align: middle;">Lewis</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a class="noti-button1 mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Extend
+                </a>
+                <a class="noti-button2 mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Return
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+        <div class="mdl-card mdl-shadow--2dp">
+            <div class="mdl-shadow--2dp">
+                <div class="mdl-card__title noti-type">
+                    DUE ASSET
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <div class="mdl-card__title noti-date">
+                        due date: 15 Feb 2017
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <div class="mdl-card__supporting-text noti-support">
+                    <ul>
+                        <li>
+                            Digital Radio Communication Tester
+                        </li>
+                        <li>
+                            model: CMD80
+                        </li>
+                        <li>
+                            sn: 849063/014
+                        </li>
+                        <li class="noti-owner">
+                            <ul>
+                                <li>
+                                    <img src="~/Content/Images/pictureplaceholder.png" alt="profile" width="25px" height="25px" style="border-radius: 50%;">
+                                </li>
+                                <li style="vertical-align: middle;">Lewis</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a class="noti-button1 mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Extend
+                </a>
+                <a class="noti-button2 mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Return
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mdl-grid added-sec">
+    <h5 class="mdl-cell mdl-cell--12-col">Recently Added Asset</h5>
+    <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--3-tablet mdl-cell--4-col-phone">
+        <div class="mdl-card mdl-shadow--2dp">
+            <img src="~/Content/Images/he300.jpg" alt="" width="100%" height="auto">
+            <div class="mdl-card__title recent-card">
+                <ul>
+                    <li>Active Directional Antenna</li>
+                    <li>model: HE300</li>
+                    <li>s/n: 101368</li>
+                </ul>
+            </div>
+            <div class="mdl-card__supporting-text">
+                Available
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <div class="recent-owner">
+                    <ul>
+                        <li>
+                            <img src="~/Content/Images/pictureplaceholder.png" alt="profile" width="25px" height="25px" style="border-radius: 50%;">
+                        </li>
+                        <li style="vertical-align: middle;">Lewis</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a href="he300.html" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="float: right;">
+                    View Equipment
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--3-tablet mdl-cell--4-col-phone">
+        <div class="mdl-card mdl-shadow--2dp">
+            <img src="~/Content/Images/he300.jpg" alt="" width="100%" height="auto">
+            <div class="mdl-card__title recent-card">
+                <ul>
+                    <li>Active Directional Antenna</li>
+                    <li>model: HE300</li>
+                    <li>s/n: 101368</li>
+                </ul>
+            </div>
+            <div class="mdl-card__supporting-text">
+                Available
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <div class="recent-owner">
+                    <ul>
+                        <li>
+                            <img src="~/Content/Images/pictureplaceholder.png" alt="profile" width="25px" height="25px" style="border-radius: 50%;">
+                        </li>
+                        <li style="vertical-align: middle;">Lewis</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a href="he300.html" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="float: right;">
+                    View Equipment
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--3-tablet mdl-cell--4-col-phone">
+        <div class="mdl-card mdl-shadow--2dp">
+            <img src="~/Content/Images/he300.jpg" alt="" width="100%" height="auto">
+            <div class="mdl-card__title recent-card">
+                <ul>
+                    <li>Active Directional Antenna</li>
+                    <li>model: HE300</li>
+                    <li>s/n: 101368</li>
+                </ul>
+            </div>
+            <div class="mdl-card__supporting-text">
+                Available
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <div class="recent-owner">
+                    <ul>
+                        <li>
+                            <img src="~/Content/Images/pictureplaceholder.png" alt="profile" width="25px" height="25px" style="border-radius: 50%;">
+                        </li>
+                        <li style="vertical-align: middle;">Lewis</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a href="he300.html" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="float: right;">
+                    View Equipment
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--3-tablet mdl-cell--4-col-phone">
+        <div class="mdl-card mdl-shadow--2dp">
+            <img src="~/Content/Images/he300.jpg" alt="" width="100%" height="auto">
+            <div class="mdl-card__title recent-card">
+                <ul>
+                    <li>Active Directional Antenna</li>
+                    <li>model: HE300</li>
+                    <li>s/n: 101368</li>
+                </ul>
+            </div>
+            <div class="mdl-card__supporting-text">
+                Available
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <div class="recent-owner">
+                    <ul>
+                        <li>
+                            <img src="~/Content/Images/pictureplaceholder.png" alt="profile" width="25px" height="25px" style="border-radius: 50%;">
+                        </li>
+                        <li style="vertical-align: middle;">Lewis</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a href="he300.html" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="float: right;">
+                    View Equipment
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mdl-grid activity-sec">
+    <h5 class="mdl-cell mdl-cell--12-col">Recent Activity</h5>
+    <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--3-tablet mdl-cell--4-col-phone">
+        <div class="mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title activity-title">
+                RETURN
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <div class="mdl-card__title loan-title mdl-shadow--2dp">
+                    <ul>
+                        <li>Jonathan</li>
+                        <li>Due Date: 15 Feb 2017</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <img src="~/Content/Images/he300.jpg" alt="he300" width="100%" height="auto">
+                <div class="mdl-card__supporting-text activity-support">
+                    <ul>
+                        <li>Active Directional Antenna</li>
+                        <li>model: HE300</li>
+                        <li>s/n: 101368</li>
+                        <li class="recent-owner">
+                            <ul>
+                                <li>
+                                    <img src="~/Content/Images/pictureplaceholder.png" alt="profile" width="25px" height="25px" style="border-radius: 50%;">
+                                </li>
+                                <li style="vertical-align: middle;">Lewis</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--3-tablet mdl-cell--4-col-phone">
+        <div class="mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title activity-title">
+                RETURN
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <div class="mdl-card__title loan-title mdl-shadow--2dp">
+                    <ul>
+                        <li>Jonathan</li>
+                        <li>Due Date: 15 Feb 2017</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <img src="~/Content/Images/he300.jpg" alt="he300" width="100%" height="auto">
+                <div class="mdl-card__supporting-text activity-support">
+                    <ul>
+                        <li>Active Directional Antenna</li>
+                        <li>model: HE300</li>
+                        <li>s/n: 101368</li>
+                        <li class="recent-owner">
+                            <ul>
+                                <li>
+                                    <img src="~/Content/Images/pictureplaceholder.png" alt="profile" width="25px" height="25px" style="border-radius: 50%;">
+                                </li>
+                                <li style="vertical-align: middle;">Lewis</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--3-tablet mdl-cell--4-col-phone">
+        <div class="mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title activity-title">
+                RETURN
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <div class="mdl-card__title loan-title mdl-shadow--2dp">
+                    <ul>
+                        <li>Jonathan</li>
+                        <li>Due Date: 15 Feb 2017</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <img src="~/Content/Images/he300.jpg" alt="he300" width="100%" height="auto">
+                <div class="mdl-card__supporting-text activity-support">
+                    <ul>
+                        <li>Active Directional Antenna</li>
+                        <li>model: HE300</li>
+                        <li>s/n: 101368</li>
+                        <li class="recent-owner">
+                            <ul>
+                                <li>
+                                    <img src="~/Content/Images/pictureplaceholder.png" alt="profile" width="25px" height="25px" style="border-radius: 50%;">
+                                </li>
+                                <li style="vertical-align: middle;">Lewis</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--3-tablet mdl-cell--4-col-phone">
+        <div class="mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title activity-title">
+                RETURN
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <div class="mdl-card__title loan-title mdl-shadow--2dp">
+                    <ul>
+                        <li>Jonathan</li>
+                        <li>Due Date: 15 Feb 2017</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <img src="~/Content/Images/he300.jpg" alt="he300" width="100%" height="auto">
+                <div class="mdl-card__supporting-text activity-support">
+                    <ul>
+                        <li>Active Directional Antenna</li>
+                        <li>model: HE300</li>
+                        <li>s/n: 101368</li>
+                        <li class="recent-owner">
+                            <ul>
+                                <li>
+                                    <img src="~/Content/Images/pictureplaceholder.png" alt="profile" width="25px" height="25px" style="border-radius: 50%;">
+                                </li>
+                                <li style="vertical-align: middle;">Lewis</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
