@@ -1,128 +1,116 @@
-html {
-    font-family: "Roboto";
-}
+html { font-family: "Roboto"; }
 
-.page-content {
-    padding-top: 10px;
-}
+.page-content { padding-top: 10px; }
 
 @media screen and (max-width: 479px) {
-    .user-wrapper {
-        display: none;
-    }
+    .user-wrapper { display: none; }
 }
 
 @media screen and (min-width: 1800px) {
     .page-content {
-        width: 50%;
         margin: auto !important;
-        min-width: 1000px;
         max-width: 1200px;
+        min-width: 1000px;
+        width: 50%;
     }
 }
 
 .search-wrapper {
     display: inline-block;
     height: 45px;
-    width: 50%;
     left: 0;
     right: 0;
+    width: 50%;
 }
 
 .search-box {
-    outline: none;
+    background-color: #3d99df;
     border: 0;
+    color: inherit;
+    font-family: "Roboto";
+    font-size: 15px;
+    font-weight: 300 !important;
     height: 35px;
     margin: 0;
-    width: calc(100% - 65px);
-    font-size: 15px;
-    color: inherit;
-    background-color: #3d99df;
-    font-weight: 300 !important;
-    font-family: "Roboto";
+    outline: none;
     padding: 5px 15px 5px 50px;
+    width: calc(100% - 65px);
 }
 
 .search-button {
-    outline: none;
+    background-color: transparent;
     border: 0;
     color: #f1f1f1;
-    background-color: transparent;
     float: left;
     margin: 10px 5px auto 5px !important;
+    outline: none;
     padding-bottom: 0 !important;
     position: absolute;
 }
 
 .header-style,
 .mdl-layout__header-row {
-    min-height: 55px !important;
-    height: 55px !important;
-    vertical-align: middle;
     background-color: #047ad4 !important;
+    height: 55px !important;
+    min-height: 55px !important;
+    vertical-align: middle;
 }
 
 @media screen and (max-width: 1024px) {
     .header-style,
-    .mdl-layout__header-row {
-        padding-left: 30px !important;
-    }
+    .mdl-layout__header-row { padding-left: 30px !important; }
+
     .mdl-layout__drawer-button {
         margin: 3px 4px !important;
         outline: none;
     }
-    .main-sub-title {
-        margin-right: 10px;
-    }
-    .body-sidebar {
-        display: none;
-    }
-    .search-wrapper {
-        margin-left: 10px;
-    }
+
+    .main-sub-title { margin-right: 10px; }
+
+    .body-sidebar { display: none; }
+
+    .search-wrapper { margin-left: 10px; }
 }
 
 @media screen and (min-width: 1025px) {
-    .mdl-layout__drawer-button {
-        display: none !important;
-    }
+    .mdl-layout__drawer-button { display: none !important; }
+
     .header-style,
-    .mdl-layout__header-row {
-        padding: 0 !important;
-    }
-    .main-header-title {
-        padding-left: 25px;
-    }
+    .mdl-layout__header-row { padding: 0 !important; }
+
+    .main-header-title { padding-left: 25px; }
+
     .search-wrapper {
-        position: fixed;
         margin: auto;
+        position: fixed;
     }
+
     .main-sub-title {
-        max-width: 100px;
         border-left: solid 1px #f5f5f5;
+        max-width: 100px;
         padding-left: 10px;
     }
-    .page-content {
-        margin-left: 285px;
-    }
-    .user-wrapper {
-        margin-right: 10px !important;
-    }
+
+    .page-content { margin-left: 285px; }
+
+    .user-wrapper { margin-right: 10px !important; }
 }
 
-.main-header-title {
+.main-header-title a {
+    color: #ffffff;
     font-family: "Roboto";
     font-size: 1.5em;
     font-weight: 500;
     max-width: 150px;
     padding-right: 20px;
+    text-decoration: none !important;
 }
 
 .main-sub-title {
     font-size: 1.2em;
     font-weight: 400;
-    white-space: normal;
     vertical-align: middle;
+    white-space: normal;
 }
 
 ::-webkit-input-placeholder {
@@ -153,18 +141,18 @@ html {
 }
 
 .body-sidebar {
-    width: 200px;
     background-color: #f1f1f1;
+    height: 80vh;
     margin: 20px;
     padding: 30px;
-    height: 80vh;
     position: fixed;
+    width: 200px;
 }
 
 .body-sidebar ul {
     list-style-type: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
 }
 
 .body-sidebar a {
@@ -187,38 +175,30 @@ html {
     padding: 0;
 }
 
-.body-sidebar li {
-    padding-bottom: 10px;
-}
+.body-sidebar li { padding-bottom: 10px; }
 
-.mdl-cell {
-    height: auto !important;
-}
+.mdl-cell { height: auto !important; }
 
 .mdl-card {
+    height: auto !important;
+    max-height: auto !important;
+    max-width: auto !important;
     min-height: 0 !important;
     min-width: 0 !important;
     width: auto !important;
-    height: auto !important;
-    max-width: auto !important;
-    max-height: auto !important;
 }
 
 .user-icon {
     background-color: #f1f1f1;
+    border-radius: 50%;
     color: #000000;
     font-size: 0.8em !important;
-    border-radius: 50%;
     vertical-align: middle;
 }
 
-.user-wrapper {
-    margin-left: auto !important
-}
+.user-wrapper { margin-left: auto !important }
 
-.user-name {
-    padding-right: 5px;
-}
+.user-name { padding-right: 5px; }
 
 .mdl-menu--bottom-right a {
     color: black !important;

@@ -22,27 +22,15 @@
 
 <div>
     <div style="float:left">
-        @Html.ActionLink(" ", "Create", null, new { @class = "Create", title = "Create Asset" })
-        @Html.ActionLink(" ", "Download", null, new { @class = "download", title = "Download" })
-        @Html.ActionLink(" ", "DownloadTemplate", null, new { @class = "template", title = "Download Template" })
+        @Html.ActionLink("Create", "Create", null, new { @class = "", title = "Create Asset" })
+        @Html.ActionLink("Download", "Download", null, new { @class = "", title = "Download" })
+        @Html.ActionLink("Download Template", "DownloadTemplate", null, new { @class = "", title = "Download Template" })
     </div>
-    <li id="searchbox">
-        @using (Html.BeginForm(null, null, FormMethod.Get))
-            {
-            <div class="searchbox">
-                @Html.TextBox("search", (string)ViewBag.search, new { id = "search", placeholder = "For multiple search please add \"@\" between the keywords", style = "width:350px" })
-                <input type="submit" value="Search" />
-            </div>
-        }
-    </li>
-    <br />
-
 </div>
 
 <div class="pages" style="float:right">
     @Html.Raw(ViewBag.Pagination)
-    <br />
-
+    <br/>
 </div>
 
     <table class="index">
