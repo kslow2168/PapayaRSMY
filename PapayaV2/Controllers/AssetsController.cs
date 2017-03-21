@@ -102,7 +102,7 @@ namespace PapayaX2.Controllers
 
                         PaginationHelper phSearch = new PaginationHelper(TotalPageSearch, Url.Content("~/Assets/Index/?page={0}" + "&search=" + search));
                         ViewBag.Pagination = phSearch.render_pagination(PageSearch);
-
+                      
                         return View(rs_assets.Distinct().OrderBy(s => s.TrackingNo).ToList().Skip(Skip).Take(Take));
                     }
                     else
@@ -121,7 +121,7 @@ namespace PapayaX2.Controllers
                         Page = TotalPage;
                         Skip = (Page - 1) * Configuration.RowPerPage;
                     }
-
+                    
                     var all_items = db.rs_assets.OrderBy(s => s.TrackingNo).ToList().Skip(Skip).Take(Take);
 
                     PaginationHelper ph = new PaginationHelper(TotalPage, Url.Content("~/Assets/Index/?page={0}" + "&search=" + search));
@@ -297,7 +297,7 @@ namespace PapayaX2.Controllers
             }
         }
 
-        // GET: Assets/Details/5
+        // GET: Assets/Details/5 
         public ActionResult Details(int? id)
         {
             if (AclHelper.hasAccess(User, currentAction, currentController))

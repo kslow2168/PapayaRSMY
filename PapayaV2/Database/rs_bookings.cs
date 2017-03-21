@@ -30,18 +30,21 @@ namespace PapayaX2.Database
         public string Purpose { get; set; }
         public bool Returned { get; set; }
         public Nullable<System.DateTime> ReturnDate { get; set; }
-        public int LoanLocationId { get; set; }
+        public Nullable<int> LoanLocationId { get; set; }
         public int ReturnLocationId { get; set; }
         public bool Damaged { get; set; }
         public int LoanFormId { get; set; }
         public int VerifyBy { get; set; }
+        public string ReturnRemark { get; set; }
+        public Nullable<int> ReturnBy { get; set; }
     
         public virtual rs_assets rs_assets { get; set; }
         public virtual rs_locations rs_locations { get; set; }
-        public virtual rs_loan_form rs_loan_form { get; set; }
         public virtual rs_user rs_user { get; set; }
+        public virtual rs_loan_form rs_loan_form { get; set; }
         public virtual rs_user rs_user1 { get; set; }
         public virtual rs_user rs_user2 { get; set; }
         public virtual rs_user rs_user3 { get; set; }
+        public virtual rs_user rs_user4 { get; set; }
     }
 }

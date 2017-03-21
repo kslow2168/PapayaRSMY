@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'E:\RSMY Dell\PapayaV2\SVN_LOCAL\trunk\PapayaX2\PapayaV2\Database\PapayaDB.edmx'. 
+﻿// T4 code generation is enabled for model 'E:\RSMY Dell\PapayaV2\SVN_LOCAL\trunk\PapayaX2WorkingGit\PapayaV2\Database\PapayaDB.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

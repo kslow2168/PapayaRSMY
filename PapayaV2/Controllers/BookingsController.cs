@@ -59,16 +59,10 @@ namespace PapayaX2.Controllers
             Thread.CurrentThread.CurrentUICulture = culture;
         }
 
-        public ActionResult Index()
-        {
-       
-            return Index(null, "");
-        }
-
         [HttpPost]
         public ActionResult Index(BookSearchModel model, string search)
         {
-           if (AclHelper.hasAccess(User, currentAction, currentController))
+            if (AclHelper.hasAccess(User, currentAction, currentController))
             {
                 List<rs_bookings> bookings = new List<rs_bookings>();
                 bookings = db.rs_bookings.ToList();
@@ -132,7 +126,7 @@ namespace PapayaX2.Controllers
         // GET: Bookings/Details/5
         public ActionResult Details(int? id)
         {
-           if (AclHelper.hasAccess(User, currentAction, currentController))
+            if (AclHelper.hasAccess(User, currentAction, currentController))
             {
                 if (id == null)
                 {
@@ -155,7 +149,7 @@ namespace PapayaX2.Controllers
         public ActionResult Book(int AssetId)
         {
             BookData model = new BookData();
-           if (AclHelper.hasAccess(User, currentAction, currentController))
+            if (AclHelper.hasAccess(User, currentAction, currentController))
             {
                 if (AssetId != 0)
                 {
@@ -164,7 +158,7 @@ namespace PapayaX2.Controllers
                     {
                         if (asset.Availability != 1)
                         {
-                            TempData["Notification"] =NotificationHelper.Inform("Asset not available for booking");
+                            TempData["Notification"] = NotificationHelper.Inform("Asset not available for booking");
                             return RedirectToAction("Index");
                         }
 
@@ -197,8 +191,8 @@ namespace PapayaX2.Controllers
                         model.EndDate = DateTime.Today;
                         model.Asset = asset;
                         model.Bookings = bookings;
-                        model.AssetId = AssetId; 
-                  
+                        model.AssetId = AssetId;
+
                         return View("Book", model);
                     }
                     else
@@ -209,7 +203,7 @@ namespace PapayaX2.Controllers
                 }
                 else
                 {
-                    TempData["Notification"] =NotificationHelper.Inform("No Asset Selected!");
+                    TempData["Notification"] = NotificationHelper.Inform("No Asset Selected!");
                     return RedirectToAction("Index");
                 }
             }
@@ -240,7 +234,7 @@ namespace PapayaX2.Controllers
                     {
                         if (asset.Availability != 1)
                         {
-                            TempData["Notification"] =NotificationHelper.Inform("Asset not available for booking");
+                            TempData["Notification"] = NotificationHelper.Inform("Asset not available for booking");
                             return RedirectToAction("Index");
                         }
 
@@ -264,7 +258,7 @@ namespace PapayaX2.Controllers
                             newBooking.UpdatedAt = newBooking.BookAt;
                             newBooking.Extended = false;
                             newBooking.ExtendedDate = null;
-                            newBooking.LoanFormId = 8; //Always put new booking into dummy form
+                            //newBooking.LoanFormId = 8; //Always put new booking into dummy form
                             newBooking.LoanLocationId = model.LoanLocationId;
                             newBooking.Purpose = model.BookPurpose;
                             newBooking.Remarks = model.Remarks;
@@ -313,13 +307,13 @@ namespace PapayaX2.Controllers
                             model.Asset = asset;
                             model.Bookings = bookings;
                             model.AssetId = asset.AssetId;
-                            
+
                             return View("Book", model);
                         }
                     }
                     else
                     {
-                        TempData["Notification"] =NotificationHelper.Inform("Asset Not found");
+                        TempData["Notification"] = NotificationHelper.Inform("Asset Not found");
                         return RedirectToAction("Index");
                     }
                 }
@@ -360,7 +354,7 @@ namespace PapayaX2.Controllers
                         model = AssetHelper.GetSystemBookModel(SystemId);
                         List<int> ids = new List<int>();
 
-                        foreach(SystemAsset ass in model.Assets)
+                        foreach (SystemAsset ass in model.Assets)
                         {
                             ids.Add(ass.SubAsset.AssetId);
                         }
@@ -479,7 +473,7 @@ namespace PapayaX2.Controllers
                                     newBooking.UpdatedAt = newBooking.BookAt;
                                     newBooking.Extended = false;
                                     newBooking.ExtendedDate = null;
-                                    newBooking.LoanFormId = 8; //Always put new booking into dummy form
+                                    ///newBooking.LoanFormId = 8; //Always put new booking into dummy form
                                     newBooking.LoanLocationId = model.LoanLocationId;
                                     newBooking.Purpose = model.BookPurpose;
                                     newBooking.Remarks = model.Remarks;
@@ -695,7 +689,7 @@ namespace PapayaX2.Controllers
                         rs_assets asset = db.rs_assets.Find(book.AssetId);
                         if (asset != null)
                         {
-                            
+
                             if (asset.IsSystem)
                             {
                                 TempData["Notification"] = NotificationHelper.Inform("This function is not for booking a System");
@@ -770,6 +764,154 @@ namespace PapayaX2.Controllers
             }
         }
 
+
+        #region ReturnItem
+        // GET: Bookings/Create New Booking
+        private ActionResult CommonReturn(int BookId, bool OnBehalf)
+        {
+            ReturnData model = new ReturnData();
+            if (AclHelper.hasAccess(User, currentAction, currentController))
+            {
+                if (BookId != 0)
+                {
+                    rs_bookings booking = db.rs_bookings.Find(BookId);
+                    if (booking != null)
+                    {
+                        if (booking.ResquestorId != AclHelper.GetUserId(User.Identity.Name) && !OnBehalf)
+                        {
+                            TempData["Notification"] = NotificationHelper.Inform("Selected booking is not belong to you!");
+                            return RedirectToAction("Index");
+                        }
+
+                        if (booking.Returned)
+                        {
+                            TempData["Notification"] = NotificationHelper.Inform("Selected booking already returned!");
+                            return RedirectToAction("Index");
+                        }
+
+                        //if (booking.Approved)
+                        //{
+                        //    TempData["Notification"] = NotificationHelper.Inform("Selected booking is not approved!");
+                        //    return RedirectToAction("Index");
+                        //}
+
+
+                        ViewBag.LoanLocationId = new SelectList(db.rs_locations, "LocationId", "LocationName");
+
+                        return View("Return", model);
+                    }
+                    else
+                    {
+                        TempData["Notification"] = NotificationHelper.Inform("Booking Not found");
+                        return RedirectToAction("Index");
+                    }
+                }
+                else
+                {
+                    TempData["Notification"] = NotificationHelper.Inform("No Asset Selected!");
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                return RedirectToAction("NotAuthenticated", "Home");
+            }
+        }
+
+        private ActionResult CommonReturn(ReturnData model, bool OnBehalf)
+        {
+            CultureInfo culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            culture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
+
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+            if (AclHelper.hasAccess(User, currentAction, currentController))
+            {
+                if (ModelState.IsValid)
+                {
+                    rs_bookings booking = db.rs_bookings.Find(model.BookId);
+                    if (booking != null)
+                    {
+                        int userId = AclHelper.GetUserId(User.Identity.Name);
+                        if (booking.ResquestorId != userId && !OnBehalf)
+                        {
+                            TempData["Notification"] = NotificationHelper.Inform("Selected booking is not belong to you!");
+                            return RedirectToAction("Index");
+                        }
+
+                        if (booking.Returned)
+                        {
+                            TempData["Notification"] = NotificationHelper.Inform("Selected booking already returned!");
+                            return RedirectToAction("Index");
+                        }
+
+                        bool ret = ReturnAsset(userId, booking.BookId, model.LocationId, model.Remarks);
+
+                        if (ret)
+                        {
+                            TempData["Notification"] = NotificationHelper.Inform("Booking returned, wait for validation");
+        
+                        }
+                        else
+                        {
+                            TempData["Notification"] = NotificationHelper.Inform("Booking not returned");
+                        }
+
+                        return RedirectToAction("Index");
+                        
+                    }
+                    else
+                    {
+                        TempData["Notification"] = NotificationHelper.Inform("Booking Not found");
+                        return RedirectToAction("Index");
+                    }
+
+                }
+
+                ViewBag.LoanLocationId = new SelectList(db.rs_locations, "LocationId", "LocationName");
+
+                return View("Return", model);
+
+            }
+            else
+            {
+                return RedirectToAction("NotAuthenticated", "Home");
+            }
+        }
+
+        // GET: Bookings/Create New Booking
+        public ActionResult Return(int BookId)
+        {
+           return CommonReturn(BookId, false);
+        }
+
+        // POST:  Bookings/Book
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Return(ReturnData model)
+        {
+            return CommonReturn(model, false);
+        }
+
+        // GET: Bookings/Create New Booking
+        public ActionResult ReturnOnBehalf(int BookId)
+        {
+            return CommonReturn(BookId, true);
+        }
+
+        // POST:  Bookings/Book
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ReturnOnBehalf(ReturnData model)
+        {
+            return CommonReturn(model, true);
+        }
+
+        #endregion
 
         /*To-DO
          * Extend Booking
@@ -852,22 +994,29 @@ namespace PapayaX2.Controllers
             {
                 DateTime cutoffDate = booking.EndDate.AddDays(30);
                 //get nearest booking if available
-                rs_bookings nextBooking = db.rs_bookings.Where(x => x.AssetId == booking.AssetId && x.StartDate > booking.EndDate && x.EndDate < cutoffDate && x.Approved && !x.Returned).First();
-               if (nextBooking != null)
+                try
                 {
-                    for (DateTime date = booking.EndDate; date.Date <= nextBooking.StartDate.Date; date = date.AddDays(1))
+                    rs_bookings nextBooking = db.rs_bookings.Where(x => x.AssetId == booking.AssetId && x.StartDate > booking.EndDate && x.EndDate < cutoffDate && x.Approved && !x.Returned).First();
+                    if (nextBooking != null)
                     {
-                        string dateStr = date.ToString("d-M-yyyy");
-                        ret.Add(dateStr);
+                        for (DateTime date = booking.EndDate; date.Date <= nextBooking.StartDate.Date; date = date.AddDays(1))
+                        {
+                            string dateStr = date.ToString("d-M-yyyy");
+                            ret.Add(dateStr);
+                        }
+                    }
+                    else //Enable max extension of 30 days
+                    {
+                        for (DateTime date = booking.EndDate; date.Date <= booking.EndDate.AddDays(30); date = date.AddDays(1))
+                        {
+                            string dateStr = date.ToString("d-M-yyyy");
+                            ret.Add(dateStr);
+                        }
                     }
                 }
-               else //Enable max extension of 30 days
+                catch (Exception e)
                 {
-                    for (DateTime date = booking.EndDate; date.Date <= booking.EndDate.AddDays(30); date = date.AddDays(1))
-                    {
-                        string dateStr = date.ToString("d-M-yyyy");
-                        ret.Add(dateStr);
-                    }
+
                 }
             }
 
@@ -899,8 +1048,8 @@ namespace PapayaX2.Controllers
 
         private List<string> GetBookedDates(List<int> AssetId)
         {
-           
-                CultureInfo culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+
+            CultureInfo culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
             culture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
 
             Thread.CurrentThread.CurrentCulture = culture;
@@ -930,9 +1079,86 @@ namespace PapayaX2.Controllers
 
             }
 
+            return ret;
+        }
 
+        private List<rs_bookings> GetExpiredBookings(int userId)
+        {
+            List<rs_bookings> ret = null;
+
+            try
+            {
+                ret = db.rs_bookings.Where(x => x.ResquestorId == userId && x.EndDate <= DateTime.Now && !x.Returned && x.Approved).ToList();
+            }
+            catch
+            { }
             return ret;
 
+        }
+        private List<rs_bookings> GetActiveBookings(int userId)
+        {
+            List<rs_bookings> ret = null;
+
+            try
+            {
+                ret = db.rs_bookings.Where(x => x.ResquestorId == userId && !x.Returned && x.Approved).ToList();
+            }
+            catch
+            { }
+            return ret;
+
+        }
+
+        private List<rs_bookings> GetRejectedBookings(int userId)
+        {
+            List<rs_bookings> ret = null;
+
+            try
+            {
+                ret = db.rs_bookings.Where(x => x.ResquestorId == userId && !x.Returned && !x.Approved).ToList();
+            }
+            catch
+            { }
+            return ret;
+
+        }
+
+        private List<rs_bookings> GetReturnedBookings(int userId)
+        {
+            List<rs_bookings> ret = null;
+
+            try
+            {
+                ret = db.rs_bookings.Where(x => x.ResquestorId == userId && x.Returned && x.Approved).ToList();
+            }
+            catch
+            { }
+            return ret;
+
+        }
+
+        public bool ReturnAsset(int userId, int bookId, int locationId, string remarks)
+        {
+            bool ret = false;
+
+            //Check if Booking existed
+            rs_bookings book = db.rs_bookings.Find(bookId);
+            if (book != null)
+            {
+                book.ReturnDate = DateTime.Now;
+                book.Returned = true;
+                book.ReturnLocationId = locationId;
+                book.UpdatedAt = DateTime.Now;
+                book.ReturnBy = userId;
+                book.ReturnRemark = remarks;
+                db.Entry(book).State = EntityState.Modified;
+                db.SaveChanges();
+                ret = true;
+
+                //Add Notification to owner here
+            }
+
+            return ret;
         }
 
         #endregion

@@ -53,6 +53,15 @@ namespace PapayaX2.Models
         }
     }
 
+    public class ReturnData
+    {
+        public string Remarks { get; set; }
+        public int LocationId { get; set; }
+        public int BookId { get; set; }
+        public string ReturnStatus { get; set; }
+        
+    }
+
     public class SystemAsset
     {
         public rs_assets SubAsset { get; set; }

@@ -102,11 +102,13 @@
           <Property Name="Purpose" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Returned" Type="bit" Nullable="false" />
           <Property Name="ReturnDate" Type="date" />
-          <Property Name="LoanLocationId" Type="int" Nullable="false" />
+          <Property Name="LoanLocationId" Type="int" />
           <Property Name="ReturnLocationId" Type="int" Nullable="false" />
           <Property Name="Damaged" Type="bit" Nullable="false" />
           <Property Name="LoanFormId" Type="int" Nullable="false" />
           <Property Name="VerifyBy" Type="int" Nullable="false" />
+          <Property Name="ReturnRemark" Type="text" />
+          <Property Name="ReturnBy" Type="int" />
         </EntityType>
         <EntityType Name="rs_bookstats">
           <Key>
@@ -406,7 +408,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_rs_bookings_rs_locations">
-          <End Role="rs_locations" Type="Self.rs_locations" Multiplicity="1" />
+          <End Role="rs_locations" Type="Self.rs_locations" Multiplicity="0..1" />
           <End Role="rs_bookings" Type="Self.rs_bookings" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="rs_locations">
@@ -414,6 +416,18 @@
             </Principal>
             <Dependent Role="rs_bookings">
               <PropertyRef Name="LoanLocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rs_bookings_rs_user">
+          <End Role="rs_user" Type="Self.rs_user" Multiplicity="0..1" />
+          <End Role="rs_bookings" Type="Self.rs_bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rs_user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="rs_bookings">
+              <PropertyRef Name="ReturnBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -648,6 +662,10 @@
             <End Role="rs_locations" EntitySet="rs_locations" />
             <End Role="rs_bookings" EntitySet="rs_bookings" />
           </AssociationSet>
+          <AssociationSet Name="FK_rs_bookings_rs_user" Association="Self.FK_rs_bookings_rs_user">
+            <End Role="rs_user" EntitySet="rs_user" />
+            <End Role="rs_bookings" EntitySet="rs_bookings" />
+          </AssociationSet>
           <AssociationSet Name="FK_se_assets_se_locations" Association="Self.FK_se_assets_se_locations">
             <End Role="rs_locations" EntitySet="rs_locations" />
             <End Role="rs_assets" EntitySet="rs_assets" />
@@ -812,6 +830,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_rs_bookings_rs_locations" Association="PapayaDB.FK_rs_bookings_rs_locations">
             <End Role="rs_locations" EntitySet="rs_locations" />
+            <End Role="rs_bookings" EntitySet="rs_bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rs_bookings_rs_user" Association="PapayaDB.FK_rs_bookings_rs_user">
+            <End Role="rs_user" EntitySet="rs_user" />
             <End Role="rs_bookings" EntitySet="rs_bookings" />
           </AssociationSet>
           <AssociationSet Name="FK_se_bookings_se_loan_form" Association="PapayaDB.FK_se_bookings_se_loan_form">
@@ -984,18 +1006,21 @@
           <Property Name="Purpose" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Returned" Type="Boolean" Nullable="false" />
           <Property Name="ReturnDate" Type="DateTime" Precision="0" />
-          <Property Name="LoanLocationId" Type="Int32" Nullable="false" />
+          <Property Name="LoanLocationId" Type="Int32" />
           <Property Name="ReturnLocationId" Type="Int32" Nullable="false" />
           <Property Name="Damaged" Type="Boolean" Nullable="false" />
           <Property Name="LoanFormId" Type="Int32" Nullable="false" />
           <Property Name="VerifyBy" Type="Int32" Nullable="false" />
+          <Property Name="ReturnRemark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ReturnBy" Type="Int32" />
           <NavigationProperty Name="rs_assets" Relationship="PapayaDB.FK_se_bookings_se_assets" FromRole="rs_bookings" ToRole="rs_assets" />
           <NavigationProperty Name="rs_locations" Relationship="PapayaDB.FK_rs_bookings_rs_locations" FromRole="rs_bookings" ToRole="rs_locations" />
+          <NavigationProperty Name="rs_user" Relationship="PapayaDB.FK_rs_bookings_rs_user" FromRole="rs_bookings" ToRole="rs_user" />
           <NavigationProperty Name="rs_loan_form" Relationship="PapayaDB.FK_se_bookings_se_loan_form" FromRole="rs_bookings" ToRole="rs_loan_form" />
-          <NavigationProperty Name="rs_user" Relationship="PapayaDB.FK_se_bookings_se_user" FromRole="rs_bookings" ToRole="rs_user" />
-          <NavigationProperty Name="rs_user1" Relationship="PapayaDB.FK_se_bookings_se_user1" FromRole="rs_bookings" ToRole="rs_user" />
-          <NavigationProperty Name="rs_user2" Relationship="PapayaDB.FK_se_bookings_se_user2" FromRole="rs_bookings" ToRole="rs_user" />
-          <NavigationProperty Name="rs_user3" Relationship="PapayaDB.FK_se_bookings_se_user3" FromRole="rs_bookings" ToRole="rs_user" />
+          <NavigationProperty Name="rs_user1" Relationship="PapayaDB.FK_se_bookings_se_user" FromRole="rs_bookings" ToRole="rs_user" />
+          <NavigationProperty Name="rs_user2" Relationship="PapayaDB.FK_se_bookings_se_user1" FromRole="rs_bookings" ToRole="rs_user" />
+          <NavigationProperty Name="rs_user3" Relationship="PapayaDB.FK_se_bookings_se_user2" FromRole="rs_bookings" ToRole="rs_user" />
+          <NavigationProperty Name="rs_user4" Relationship="PapayaDB.FK_se_bookings_se_user3" FromRole="rs_bookings" ToRole="rs_user" />
         </EntityType>
         <EntityType Name="rs_bookstats">
           <Key>
@@ -1162,10 +1187,11 @@
           <Property Name="DateUpdate" Type="DateTime" Precision="3" />
           <Property Name="DivId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="rs_assets" Relationship="PapayaDB.FK_rs_assets_rs_user" FromRole="rs_user" ToRole="rs_assets" />
-          <NavigationProperty Name="rs_bookings" Relationship="PapayaDB.FK_se_bookings_se_user" FromRole="rs_user" ToRole="rs_bookings" />
-          <NavigationProperty Name="rs_bookings1" Relationship="PapayaDB.FK_se_bookings_se_user1" FromRole="rs_user" ToRole="rs_bookings" />
-          <NavigationProperty Name="rs_bookings2" Relationship="PapayaDB.FK_se_bookings_se_user2" FromRole="rs_user" ToRole="rs_bookings" />
-          <NavigationProperty Name="rs_bookings3" Relationship="PapayaDB.FK_se_bookings_se_user3" FromRole="rs_user" ToRole="rs_bookings" />
+          <NavigationProperty Name="rs_bookings" Relationship="PapayaDB.FK_rs_bookings_rs_user" FromRole="rs_user" ToRole="rs_bookings" />
+          <NavigationProperty Name="rs_bookings1" Relationship="PapayaDB.FK_se_bookings_se_user" FromRole="rs_user" ToRole="rs_bookings" />
+          <NavigationProperty Name="rs_bookings2" Relationship="PapayaDB.FK_se_bookings_se_user1" FromRole="rs_user" ToRole="rs_bookings" />
+          <NavigationProperty Name="rs_bookings3" Relationship="PapayaDB.FK_se_bookings_se_user2" FromRole="rs_user" ToRole="rs_bookings" />
+          <NavigationProperty Name="rs_bookings4" Relationship="PapayaDB.FK_se_bookings_se_user3" FromRole="rs_user" ToRole="rs_bookings" />
           <NavigationProperty Name="rs_division" Relationship="PapayaDB.FK_se_user_se_division" FromRole="rs_user" ToRole="rs_division" />
           <NavigationProperty Name="rs_smslogs" Relationship="PapayaDB.FK_se_smslogs_se_user" FromRole="rs_user" ToRole="rs_smslogs" />
           <NavigationProperty Name="rs_user_group" Relationship="PapayaDB.FK_se_user_se_user_group" FromRole="rs_user" ToRole="rs_user_group" />
@@ -1357,7 +1383,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_rs_bookings_rs_locations">
-          <End Type="PapayaDB.rs_locations" Role="rs_locations" Multiplicity="1" />
+          <End Type="PapayaDB.rs_locations" Role="rs_locations" Multiplicity="0..1" />
           <End Type="PapayaDB.rs_bookings" Role="rs_bookings" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="rs_locations">
@@ -1365,6 +1391,18 @@
             </Principal>
             <Dependent Role="rs_bookings">
               <PropertyRef Name="LoanLocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rs_bookings_rs_user">
+          <End Type="PapayaDB.rs_user" Role="rs_user" Multiplicity="0..1" />
+          <End Type="PapayaDB.rs_bookings" Role="rs_bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rs_user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="rs_bookings">
+              <PropertyRef Name="ReturnBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1590,6 +1628,8 @@
           <EntitySetMapping Name="rs_bookings">
             <EntityTypeMapping TypeName="PapayaDB.rs_bookings">
               <MappingFragment StoreEntitySet="rs_bookings">
+                <ScalarProperty Name="ReturnBy" ColumnName="ReturnBy" />
+                <ScalarProperty Name="ReturnRemark" ColumnName="ReturnRemark" />
                 <ScalarProperty Name="VerifyBy" ColumnName="VerifyBy" />
                 <ScalarProperty Name="LoanFormId" ColumnName="LoanFormId" />
                 <ScalarProperty Name="Damaged" ColumnName="Damaged" />
