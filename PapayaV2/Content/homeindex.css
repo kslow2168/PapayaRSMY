@@ -31,11 +31,11 @@
 
 .noti-owner li {
     display: inline;
-    font-size: 1.1em;
+    font-size: 0.9em;
 }
 
 .mdl-card__supporting-text {
-    padding: 0 16px 5px 16px  !important;
+    padding: 0 16px  !important;
 }
 
 .mdl-card__actions {
@@ -67,15 +67,17 @@
     height: 100%;
 }
 
+.recent-owner2 ul,
 .recent-owner ul {
     list-style-type: none;
     padding: 0 !important;
     margin: 5px 16px;
 }
 
+.recent-owner2 li,
 .recent-owner li {
     display: inline;
-    font-size: 1em;
+    font-size: 0.8em;
 }
 
 .activity-support ul {
@@ -83,6 +85,7 @@
     padding: 0 16px;
     margin: 5px 0 !important;
     font-weight: 600;
+    font-size: 0.95em;
 }
 
 .activity-support ul li ul {
@@ -103,4 +106,10 @@
 
 .activity-sec img {
     margin: 5px auto;
+}
+
+.recent-owner2 ul,
+.noti-owner ul {
+    padding-top: 3px !important;
+    margin: 0 !important;
 }
