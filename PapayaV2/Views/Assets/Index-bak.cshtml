@@ -1,12 +1,15 @@
 ﻿@model IEnumerable<PapayaX2.Database.rs_assets>
 
-@section Styles {
-    <link href="@Url.Content("~/Content/assetindex.css")" rel="stylesheet" type="text/css" />
-}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#search").DefaultValue("Search");
+    });
+
+</script>
+
 
 @{
-    ViewBag.Title = "All Assets";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Assets Inventory List";
 }
 
 @if (TempData["Notification"] != null)

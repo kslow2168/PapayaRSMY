@@ -53,12 +53,21 @@ namespace PapayaX2.Models
         }
     }
 
+
+    /* Status
+     * 1 - Available
+     * 2 - Damaged
+     * 3 - Blocked
+     * 4 - Repair
+     * 5 - Calibration
+     */ 
     public class ReturnData
     {
+        public rs_assets Asset { get; set; }
         public string Remarks { get; set; }
         public int LocationId { get; set; }
         public int BookId { get; set; }
-        public string ReturnStatus { get; set; }
+        public int ReturnStatus { get; set; }
         
     }
 

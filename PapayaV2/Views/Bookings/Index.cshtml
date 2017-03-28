@@ -89,6 +89,7 @@
             </td>
             <td>
                 @Html.ActionLink("Extend Booking", "BookExtension", new { bookingId = item.BookId }) |
+                @Html.ActionLink("Return Booking", "Return", new { bookingId = item.BookId }) |
             </td>
         </tr>
     }

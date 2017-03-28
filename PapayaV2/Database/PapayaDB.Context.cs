@@ -31,6 +31,7 @@ namespace PapayaX2.Database
         public virtual DbSet<rs_action> rs_action { get; set; }
         public virtual DbSet<rs_assets> rs_assets { get; set; }
         public virtual DbSet<rs_assets_rel> rs_assets_rel { get; set; }
+        public virtual DbSet<rs_assetstatus> rs_assetstatus { get; set; }
         public virtual DbSet<rs_bookings> rs_bookings { get; set; }
         public virtual DbSet<rs_bookstats> rs_bookstats { get; set; }
         public virtual DbSet<rs_company> rs_company { get; set; }

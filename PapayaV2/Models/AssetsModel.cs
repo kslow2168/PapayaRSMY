@@ -18,11 +18,9 @@ namespace PapayaX2.Models
         public int OwnerId { get; set; }
         public int DivId { get; set; }
         public int OwnerShipId { get; set; }
-
         public int SubAssetId { get; set; }
-
         public int SystemId { get; set; }
-
+        public int Availability { get; set; }
         public SystemModel()
         {
             System = new rs_assets();

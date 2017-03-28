@@ -72,8 +72,7 @@ namespace PapayaX2.Database
         public virtual ICollection<rs_assets_rel> rs_assets_rel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<rs_assets_rel> rs_assets_rel1 { get; set; }
-        public virtual rs_assets rs_assets1 { get; set; }
-        public virtual rs_assets rs_assets2 { get; set; }
+        public virtual rs_assetstatus rs_assetstatus { get; set; }
         public virtual rs_division rs_division { get; set; }
         public virtual rs_ownership rs_ownership { get; set; }
         public virtual rs_user rs_user { get; set; }

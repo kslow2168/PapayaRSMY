@@ -59,6 +59,12 @@ namespace PapayaX2.Controllers
             Thread.CurrentThread.CurrentUICulture = culture;
         }
 
+        public ActionResult Index()
+        {
+
+            return Index(null, "");
+        }
+
         [HttpPost]
         public ActionResult Index(BookSearchModel model, string search)
         {
@@ -186,6 +192,7 @@ namespace PapayaX2.Controllers
                             model.IsBookOnBehalf = true;
                         }
                         ViewBag.LoanLocationId = new SelectList(db.rs_locations, "LocationId", "LocationName");
+                        //ViewBag.Status = new SelectList(db.rs_assetstatus, "StatusId", "Status");
 
                         model.StartDate = DateTime.Today;
                         model.EndDate = DateTime.Today;
@@ -301,6 +308,7 @@ namespace PapayaX2.Controllers
                                 model.IsBookOnBehalf = true;
                             }
                             ViewBag.LoanLocationId = new SelectList(db.rs_locations, "LocationId", "LocationName");
+                            //ViewBag.Status = new SelectList(db.rs_assetstatus, "StatusId", "Status");
 
                             model.StartDate = DateTime.Today;
                             model.EndDate = DateTime.Today;
@@ -378,6 +386,7 @@ namespace PapayaX2.Controllers
                             model.IsBookOnBehalf = true;
                         }
                         ViewBag.LoanLocationId = new SelectList(db.rs_locations, "LocationId", "LocationName");
+                        //ViewBag.Status = new SelectList(db.rs_assetstatus, "StatusId", "Status");
 
                         model.StartDate = DateTime.Today;
                         model.EndDate = DateTime.Today;
@@ -525,6 +534,7 @@ namespace PapayaX2.Controllers
                                 model.IsBookOnBehalf = true;
                             }
                             ViewBag.LoanLocationId = new SelectList(db.rs_locations, "LocationId", "LocationName");
+                            //ViewBag.Status = new SelectList(db.rs_assetstatus, "StatusId", "Status");
 
                             model.StartDate = DateTime.Today;
                             model.EndDate = DateTime.Today;
@@ -613,6 +623,8 @@ namespace PapayaX2.Controllers
                                 model.IsBookOnBehalf = true;
                             }
                             ViewBag.LoanLocationId = new SelectList(db.rs_locations, "LocationId", "LocationName");
+                            //ViewBag.Status = new SelectList(db.rs_assetstatus, "StatusId", "Status");
+
                             model.Remarks = book.Remarks;
                             model.BookPurpose = book.Purpose;
                             model.StartDate = book.StartDate;
@@ -729,6 +741,7 @@ namespace PapayaX2.Controllers
                                     model.IsBookOnBehalf = true;
                                 }
                                 ViewBag.LoanLocationId = new SelectList(db.rs_locations, "LocationId", "LocationName");
+                                //ViewBag.Status = new SelectList(db.rs_assetstatus, "StatusId", "Status");
 
                                 model.StartDate = book.StartDate;
                                 model.EndDate = book.EndDate;
@@ -777,6 +790,7 @@ namespace PapayaX2.Controllers
                     rs_bookings booking = db.rs_bookings.Find(BookId);
                     if (booking != null)
                     {
+                        model.BookId = BookId;
                         if (booking.ResquestorId != AclHelper.GetUserId(User.Identity.Name) && !OnBehalf)
                         {
                             TempData["Notification"] = NotificationHelper.Inform("Selected booking is not belong to you!");
@@ -794,9 +808,9 @@ namespace PapayaX2.Controllers
                         //    TempData["Notification"] = NotificationHelper.Inform("Selected booking is not approved!");
                         //    return RedirectToAction("Index");
                         //}
-
-
+                        
                         ViewBag.LoanLocationId = new SelectList(db.rs_locations, "LocationId", "LocationName");
+                        ViewBag.Status = new SelectList(db.rs_assetstatus, "StatusId", "Status");
 
                         return View("Return", model);
                     }
@@ -831,8 +845,9 @@ namespace PapayaX2.Controllers
                 {
                     rs_bookings booking = db.rs_bookings.Find(model.BookId);
                     if (booking != null)
-                    {
+                    { 
                         int userId = AclHelper.GetUserId(User.Identity.Name);
+            
                         if (booking.ResquestorId != userId && !OnBehalf)
                         {
                             TempData["Notification"] = NotificationHelper.Inform("Selected booking is not belong to you!");
@@ -845,7 +860,7 @@ namespace PapayaX2.Controllers
                             return RedirectToAction("Index");
                         }
 
-                        bool ret = ReturnAsset(userId, booking.BookId, model.LocationId, model.Remarks);
+                        bool ret = ReturnAsset(userId, model.BookId, model.LocationId, model.ReturnStatus, model.Remarks);
 
                         if (ret)
                         {
@@ -857,6 +872,7 @@ namespace PapayaX2.Controllers
                             TempData["Notification"] = NotificationHelper.Inform("Booking not returned");
                         }
 
+                   
                         return RedirectToAction("Index");
                         
                     }
@@ -869,6 +885,7 @@ namespace PapayaX2.Controllers
                 }
 
                 ViewBag.LoanLocationId = new SelectList(db.rs_locations, "LocationId", "LocationName");
+                ViewBag.Status = new SelectList(db.rs_assetstatus, "StatusId", "Status");
 
                 return View("Return", model);
 
@@ -1137,7 +1154,7 @@ namespace PapayaX2.Controllers
 
         }
 
-        public bool ReturnAsset(int userId, int bookId, int locationId, string remarks)
+        public bool ReturnAsset(int userId, int bookId, int locationId, int status, string remarks)
         {
             bool ret = false;
 
@@ -1145,12 +1162,29 @@ namespace PapayaX2.Controllers
             rs_bookings book = db.rs_bookings.Find(bookId);
             if (book != null)
             {
+                rs_assetstatus statusEntry = db.rs_assetstatus.Find(status);
+                if (statusEntry != null)
+                {
+                    try
+                    {
+                        book.Damaged = (statusEntry.Status.ToUpper().Contains("Damaged") ? true : false);
+                    }
+                    catch
+                    { }
+                }
+                rs_assets asset = db.rs_assets.Find(book.AssetId);
+
+                asset.Availability = status;
+                db.Entry(asset).State = EntityState.Modified;
+                db.SaveChanges();
+
                 book.ReturnDate = DateTime.Now;
                 book.Returned = true;
                 book.ReturnLocationId = locationId;
                 book.UpdatedAt = DateTime.Now;
                 book.ReturnBy = userId;
                 book.ReturnRemark = remarks;
+                
                 db.Entry(book).State = EntityState.Modified;
                 db.SaveChanges();
                 ret = true;
@@ -1160,7 +1194,6 @@ namespace PapayaX2.Controllers
 
             return ret;
         }
-
         #endregion
     }
 }

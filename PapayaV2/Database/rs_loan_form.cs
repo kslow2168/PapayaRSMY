@@ -37,8 +37,11 @@ namespace PapayaX2.Database
         public bool Returned { get; set; }
         public bool Signed { get; set; }
         public string UploadedFile { get; set; }
+        public int CreatedBy { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<rs_bookings> rs_bookings { get; set; }
+        public virtual rs_user rs_user { get; set; }
+        public virtual rs_user rs_user1 { get; set; }
     }
 }

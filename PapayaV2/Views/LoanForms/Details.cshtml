@@ -1,0 +1,154 @@
+﻿@model PapayaX2.Database.rs_loan_form
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>rs_loan_form</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.RequestNo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.RequestNo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.RequestorId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.RequestorId)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Company)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Company)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactPersion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ContactPersion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Telephone)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Telephone)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Purpose)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Purpose)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CreatedDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.UpdatedDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Invalid)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Invalid)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Returned)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Returned)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Signed)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Signed)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.UploadedFile)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.UploadedFile)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.LoanId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

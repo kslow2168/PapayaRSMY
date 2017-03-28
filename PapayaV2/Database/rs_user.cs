@@ -23,6 +23,8 @@ namespace PapayaX2.Database
             this.rs_bookings2 = new HashSet<rs_bookings>();
             this.rs_bookings3 = new HashSet<rs_bookings>();
             this.rs_bookings4 = new HashSet<rs_bookings>();
+            this.rs_loan_form = new HashSet<rs_loan_form>();
+            this.rs_loan_form1 = new HashSet<rs_loan_form>();
             this.rs_smslogs = new HashSet<rs_smslogs>();
         }
     
@@ -56,6 +58,10 @@ namespace PapayaX2.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<rs_bookings> rs_bookings4 { get; set; }
         public virtual rs_division rs_division { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<rs_loan_form> rs_loan_form { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<rs_loan_form> rs_loan_form1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<rs_smslogs> rs_smslogs { get; set; }
         public virtual rs_user_group rs_user_group { get; set; }

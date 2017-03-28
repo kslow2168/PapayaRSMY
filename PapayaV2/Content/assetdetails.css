@@ -1,0 +1,100 @@
+.table-outer {
+    overflow-x: scroll;
+    width: 100%;
+}
+
+.asset-img img {
+    width: 100%;
+    height: 100%;
+    max-height: 200px;
+    vertical-align: middle;
+}
+
+.asset-img {
+    width: 100%;
+}
+
+.asset-section-head {
+    text-align: right;
+    font-weight: 700;
+    font-size: 1.1em;
+    padding-bottom: 5px;
+}
+
+.asset-section-head2 {
+    text-align: left;
+    font-weight: 700;
+    font-size: 1.1em;
+    padding-bottom: 5px;
+    padding-top: 10px;
+}
+
+table.main-asset-table {
+    width: 100%;
+    padding: 15px 15px 5px 15px;
+}
+
+table.sub-asset-table {
+    width: 100%;
+    padding: 15px 15px 5px 15px;
+}
+
+.sub-asset-wrapper li {
+    display: inline-block;
+    width: 49.5%;
+    margin: auto;
+    vertical-align: top;
+}
+
+.sub-asset-wrapper ul {
+    margin: 0 auto;
+    padding: 0;
+    width: 100.5%;
+}
+
+table.main-asset-table th,
+table.main-asset-table td,
+table.sub-asset-table th,
+table.sub-asset-table td {
+    vertical-align: text-top;
+    font-size: 0.9em;
+    padding-bottom: 10px;
+}
+
+table.main-asset-table th,
+table.sub-asset-table th {
+    text-align: right;
+    width: 20%;
+    padding-left: 10px;
+}
+
+table.main-asset-table td,
+table.sub-asset-table td {
+    text-align: left;
+    padding-left: 10%;
+}
+
+table.active-booking-table {
+    width: 100%;
+}
+
+.mdl-card__actions {
+    padding: 13px 0 !important;
+}
+
+.advanced-plus {
+    height: 15px !important;
+    min-width: 10px !important;
+    width: 15px !important;
+    background-color: #ffffff !important;
+    margin-bottom: 4px !important;
+}
+
+.advanced-plus-en {
+    height: 15px !important;
+    min-width: 10px !important;
+    width: 15px !important;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    margin-bottom: 4px !important;
+}

@@ -82,6 +82,13 @@
           <Property Name="SysId" Type="int" Nullable="false" />
           <Property Name="AssetId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="rs_assetstatus">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="rs_bookings">
           <Key>
             <PropertyRef Name="BookId" />
@@ -105,7 +112,7 @@
           <Property Name="LoanLocationId" Type="int" />
           <Property Name="ReturnLocationId" Type="int" Nullable="false" />
           <Property Name="Damaged" Type="bit" Nullable="false" />
-          <Property Name="LoanFormId" Type="int" Nullable="false" />
+          <Property Name="LoanFormId" Type="int" />
           <Property Name="VerifyBy" Type="int" Nullable="false" />
           <Property Name="ReturnRemark" Type="text" />
           <Property Name="ReturnBy" Type="int" />
@@ -181,6 +188,7 @@
           <Property Name="Returned" Type="bit" Nullable="false" />
           <Property Name="Signed" Type="bit" Nullable="false" />
           <Property Name="UploadedFile" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="rs_locations">
           <Key>
@@ -359,15 +367,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rs_assets_rs_assets">
-          <End Role="rs_assets" Type="Self.rs_assets" Multiplicity="1" />
-          <End Role="rs_assets1" Type="Self.rs_assets" Multiplicity="0..1" />
+        <Association Name="FK_rs_assets_rs_assetstatus">
+          <End Role="rs_assetstatus" Type="Self.rs_assetstatus" Multiplicity="1" />
+          <End Role="rs_assets" Type="Self.rs_assets" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="rs_assets">
-              <PropertyRef Name="AssetId" />
+            <Principal Role="rs_assetstatus">
+              <PropertyRef Name="StatusId" />
             </Principal>
-            <Dependent Role="rs_assets1">
-              <PropertyRef Name="AssetId" />
+            <Dependent Role="rs_assets">
+              <PropertyRef Name="Availability" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -431,6 +439,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_rs_loan_form_rs_user">
+          <End Role="rs_user" Type="Self.rs_user" Multiplicity="1" />
+          <End Role="rs_loan_form" Type="Self.rs_loan_form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rs_user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="rs_loan_form">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rs_loan_form_rs_user1">
+          <End Role="rs_user" Type="Self.rs_user" Multiplicity="1" />
+          <End Role="rs_loan_form" Type="Self.rs_loan_form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rs_user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="rs_loan_form">
+              <PropertyRef Name="RequestorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_se_assets_se_locations">
           <End Role="rs_locations" Type="Self.rs_locations" Multiplicity="1" />
           <End Role="rs_assets" Type="Self.rs_assets" Multiplicity="*" />
@@ -468,7 +500,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_se_bookings_se_loan_form">
-          <End Role="rs_loan_form" Type="Self.rs_loan_form" Multiplicity="1" />
+          <End Role="rs_loan_form" Type="Self.rs_loan_form" Multiplicity="0..1" />
           <End Role="rs_bookings" Type="Self.rs_bookings" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="rs_loan_form">
@@ -604,6 +636,7 @@
           <EntitySet Name="rs_action" EntityType="Self.rs_action" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rs_assets" EntityType="Self.rs_assets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rs_assets_rel" EntityType="Self.rs_assets_rel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rs_assetstatus" EntityType="Self.rs_assetstatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rs_bookings" EntityType="Self.rs_bookings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rs_bookstats" EntityType="Self.rs_bookstats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rs_company" EntityType="Self.rs_company" Schema="dbo" store:Type="Tables" />
@@ -642,9 +675,9 @@
             <End Role="rs_assets" EntitySet="rs_assets" />
             <End Role="rs_accessories" EntitySet="rs_accessories" />
           </AssociationSet>
-          <AssociationSet Name="FK_rs_assets_rs_assets" Association="Self.FK_rs_assets_rs_assets">
+          <AssociationSet Name="FK_rs_assets_rs_assetstatus" Association="Self.FK_rs_assets_rs_assetstatus">
+            <End Role="rs_assetstatus" EntitySet="rs_assetstatus" />
             <End Role="rs_assets" EntitySet="rs_assets" />
-            <End Role="rs_assets1" EntitySet="rs_assets" />
           </AssociationSet>
           <AssociationSet Name="FK_rs_assets_rs_division" Association="Self.FK_rs_assets_rs_division">
             <End Role="rs_division" EntitySet="rs_division" />
@@ -665,6 +698,14 @@
           <AssociationSet Name="FK_rs_bookings_rs_user" Association="Self.FK_rs_bookings_rs_user">
             <End Role="rs_user" EntitySet="rs_user" />
             <End Role="rs_bookings" EntitySet="rs_bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rs_loan_form_rs_user" Association="Self.FK_rs_loan_form_rs_user">
+            <End Role="rs_user" EntitySet="rs_user" />
+            <End Role="rs_loan_form" EntitySet="rs_loan_form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rs_loan_form_rs_user1" Association="Self.FK_rs_loan_form_rs_user1">
+            <End Role="rs_user" EntitySet="rs_user" />
+            <End Role="rs_loan_form" EntitySet="rs_loan_form" />
           </AssociationSet>
           <AssociationSet Name="FK_se_assets_se_locations" Association="Self.FK_se_assets_se_locations">
             <End Role="rs_locations" EntitySet="rs_locations" />
@@ -762,6 +803,7 @@
           <EntitySet Name="rs_action" EntityType="PapayaDB.rs_action" />
           <EntitySet Name="rs_assets" EntityType="PapayaDB.rs_assets" />
           <EntitySet Name="rs_assets_rel" EntityType="PapayaDB.rs_assets_rel" />
+          <EntitySet Name="rs_assetstatus" EntityType="PapayaDB.rs_assetstatus" />
           <EntitySet Name="rs_bookings" EntityType="PapayaDB.rs_bookings" />
           <EntitySet Name="rs_bookstats" EntityType="PapayaDB.rs_bookstats" />
           <EntitySet Name="rs_company" EntityType="PapayaDB.rs_company" />
@@ -796,9 +838,9 @@
             <End Role="rs_assets" EntitySet="rs_assets" />
             <End Role="rs_assets_rel" EntitySet="rs_assets_rel" />
           </AssociationSet>
-          <AssociationSet Name="FK_rs_assets_rs_assets" Association="PapayaDB.FK_rs_assets_rs_assets">
+          <AssociationSet Name="FK_rs_assets_rs_assetstatus" Association="PapayaDB.FK_rs_assets_rs_assetstatus">
+            <End Role="rs_assetstatus" EntitySet="rs_assetstatus" />
             <End Role="rs_assets" EntitySet="rs_assets" />
-            <End Role="rs_assets1" EntitySet="rs_assets" />
           </AssociationSet>
           <AssociationSet Name="FK_rs_assets_rs_division" Association="PapayaDB.FK_rs_assets_rs_division">
             <End Role="rs_division" EntitySet="rs_division" />
@@ -863,6 +905,14 @@
           <AssociationSet Name="FK_se_user_se_division" Association="PapayaDB.FK_se_user_se_division">
             <End Role="rs_division" EntitySet="rs_division" />
             <End Role="rs_user" EntitySet="rs_user" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rs_loan_form_rs_user" Association="PapayaDB.FK_rs_loan_form_rs_user">
+            <End Role="rs_user" EntitySet="rs_user" />
+            <End Role="rs_loan_form" EntitySet="rs_loan_form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rs_loan_form_rs_user1" Association="PapayaDB.FK_rs_loan_form_rs_user1">
+            <End Role="rs_user" EntitySet="rs_user" />
+            <End Role="rs_loan_form" EntitySet="rs_loan_form" />
           </AssociationSet>
           <AssociationSet Name="FK__rs_module__Paren__33D4B598" Association="PapayaDB.FK__rs_module__Paren__33D4B598">
             <End Role="rs_module" EntitySet="rs_module" />
@@ -966,8 +1016,7 @@
           <NavigationProperty Name="rs_accessories" Relationship="PapayaDB.FK_rs_accessories_rs_assets" FromRole="rs_assets" ToRole="rs_accessories" />
           <NavigationProperty Name="rs_assets_rel" Relationship="PapayaDB.FK_AssetRelation_Asset" FromRole="rs_assets" ToRole="rs_assets_rel" />
           <NavigationProperty Name="rs_assets_rel1" Relationship="PapayaDB.FK_AssetRelation_System" FromRole="rs_assets" ToRole="rs_assets_rel" />
-          <NavigationProperty Name="rs_assets1" Relationship="PapayaDB.FK_rs_assets_rs_assets" FromRole="rs_assets" ToRole="rs_assets1" />
-          <NavigationProperty Name="rs_assets2" Relationship="PapayaDB.FK_rs_assets_rs_assets" FromRole="rs_assets1" ToRole="rs_assets" />
+          <NavigationProperty Name="rs_assetstatus" Relationship="PapayaDB.FK_rs_assets_rs_assetstatus" FromRole="rs_assets" ToRole="rs_assetstatus" />
           <NavigationProperty Name="rs_division" Relationship="PapayaDB.FK_rs_assets_rs_division" FromRole="rs_assets" ToRole="rs_division" />
           <NavigationProperty Name="rs_ownership" Relationship="PapayaDB.FK_rs_assets_rs_ownership" FromRole="rs_assets" ToRole="rs_ownership" />
           <NavigationProperty Name="rs_user" Relationship="PapayaDB.FK_rs_assets_rs_user" FromRole="rs_assets" ToRole="rs_user" />
@@ -985,6 +1034,14 @@
           <Property Name="AssetId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="rs_assets" Relationship="PapayaDB.FK_AssetRelation_Asset" FromRole="rs_assets_rel" ToRole="rs_assets" />
           <NavigationProperty Name="rs_assets1" Relationship="PapayaDB.FK_AssetRelation_System" FromRole="rs_assets_rel" ToRole="rs_assets" />
+        </EntityType>
+        <EntityType Name="rs_assetstatus">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="rs_assets" Relationship="PapayaDB.FK_rs_assets_rs_assetstatus" FromRole="rs_assetstatus" ToRole="rs_assets" />
         </EntityType>
         <EntityType Name="rs_bookings">
           <Key>
@@ -1009,7 +1066,7 @@
           <Property Name="LoanLocationId" Type="Int32" />
           <Property Name="ReturnLocationId" Type="Int32" Nullable="false" />
           <Property Name="Damaged" Type="Boolean" Nullable="false" />
-          <Property Name="LoanFormId" Type="Int32" Nullable="false" />
+          <Property Name="LoanFormId" Type="Int32" />
           <Property Name="VerifyBy" Type="Int32" Nullable="false" />
           <Property Name="ReturnRemark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ReturnBy" Type="Int32" />
@@ -1098,7 +1155,10 @@
           <Property Name="Returned" Type="Boolean" Nullable="false" />
           <Property Name="Signed" Type="Boolean" Nullable="false" />
           <Property Name="UploadedFile" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <NavigationProperty Name="rs_bookings" Relationship="PapayaDB.FK_se_bookings_se_loan_form" FromRole="rs_loan_form" ToRole="rs_bookings" />
+          <NavigationProperty Name="rs_user" Relationship="PapayaDB.FK_rs_loan_form_rs_user" FromRole="rs_loan_form" ToRole="rs_user" />
+          <NavigationProperty Name="rs_user1" Relationship="PapayaDB.FK_rs_loan_form_rs_user1" FromRole="rs_loan_form" ToRole="rs_user" />
         </EntityType>
         <EntityType Name="rs_locations">
           <Key>
@@ -1193,6 +1253,8 @@
           <NavigationProperty Name="rs_bookings3" Relationship="PapayaDB.FK_se_bookings_se_user2" FromRole="rs_user" ToRole="rs_bookings" />
           <NavigationProperty Name="rs_bookings4" Relationship="PapayaDB.FK_se_bookings_se_user3" FromRole="rs_user" ToRole="rs_bookings" />
           <NavigationProperty Name="rs_division" Relationship="PapayaDB.FK_se_user_se_division" FromRole="rs_user" ToRole="rs_division" />
+          <NavigationProperty Name="rs_loan_form" Relationship="PapayaDB.FK_rs_loan_form_rs_user" FromRole="rs_user" ToRole="rs_loan_form" />
+          <NavigationProperty Name="rs_loan_form1" Relationship="PapayaDB.FK_rs_loan_form_rs_user1" FromRole="rs_user" ToRole="rs_loan_form" />
           <NavigationProperty Name="rs_smslogs" Relationship="PapayaDB.FK_se_smslogs_se_user" FromRole="rs_user" ToRole="rs_smslogs" />
           <NavigationProperty Name="rs_user_group" Relationship="PapayaDB.FK_se_user_se_user_group" FromRole="rs_user" ToRole="rs_user_group" />
         </EntityType>
@@ -1286,15 +1348,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rs_assets_rs_assets">
-          <End Type="PapayaDB.rs_assets" Role="rs_assets" Multiplicity="1" />
-          <End Type="PapayaDB.rs_assets" Role="rs_assets1" Multiplicity="0..1" />
+        <Association Name="FK_rs_assets_rs_assetstatus">
+          <End Type="PapayaDB.rs_assetstatus" Role="rs_assetstatus" Multiplicity="1" />
+          <End Type="PapayaDB.rs_assets" Role="rs_assets" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="rs_assets">
-              <PropertyRef Name="AssetId" />
+            <Principal Role="rs_assetstatus">
+              <PropertyRef Name="StatusId" />
             </Principal>
-            <Dependent Role="rs_assets1">
-              <PropertyRef Name="AssetId" />
+            <Dependent Role="rs_assets">
+              <PropertyRef Name="Availability" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1407,7 +1469,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_se_bookings_se_loan_form">
-          <End Type="PapayaDB.rs_loan_form" Role="rs_loan_form" Multiplicity="1" />
+          <End Type="PapayaDB.rs_loan_form" Role="rs_loan_form" Multiplicity="0..1" />
           <End Type="PapayaDB.rs_bookings" Role="rs_bookings" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="rs_loan_form">
@@ -1487,6 +1549,30 @@
             </Principal>
             <Dependent Role="rs_user">
               <PropertyRef Name="DivId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rs_loan_form_rs_user">
+          <End Type="PapayaDB.rs_user" Role="rs_user" Multiplicity="1" />
+          <End Type="PapayaDB.rs_loan_form" Role="rs_loan_form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rs_user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="rs_loan_form">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rs_loan_form_rs_user1">
+          <End Type="PapayaDB.rs_user" Role="rs_user" Multiplicity="1" />
+          <End Type="PapayaDB.rs_loan_form" Role="rs_loan_form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rs_user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="rs_loan_form">
+              <PropertyRef Name="RequestorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1625,6 +1711,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="rs_assetstatus">
+            <EntityTypeMapping TypeName="PapayaDB.rs_assetstatus">
+              <MappingFragment StoreEntitySet="rs_assetstatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="rs_bookings">
             <EntityTypeMapping TypeName="PapayaDB.rs_bookings">
               <MappingFragment StoreEntitySet="rs_bookings">
@@ -1711,6 +1805,7 @@
           <EntitySetMapping Name="rs_loan_form">
             <EntityTypeMapping TypeName="PapayaDB.rs_loan_form">
               <MappingFragment StoreEntitySet="rs_loan_form">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UploadedFile" ColumnName="UploadedFile" />
                 <ScalarProperty Name="Signed" ColumnName="Signed" />
                 <ScalarProperty Name="Returned" ColumnName="Returned" />

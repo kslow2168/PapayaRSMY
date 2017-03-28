@@ -5,6 +5,10 @@
     font-weight: 600;
 }
 
+.noti-sec {
+    background-color: #ffffff;
+}
+
 .loan-title,
 .noti-date {
     padding: 8px 16px 8px 16px !important;
@@ -13,7 +17,6 @@
 
 .noti-support {
     padding: 0 !important;
-    
 }
 
 .noti-support ul {

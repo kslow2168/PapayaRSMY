@@ -33,7 +33,7 @@ namespace PapayaX2.Database
         public Nullable<int> LoanLocationId { get; set; }
         public int ReturnLocationId { get; set; }
         public bool Damaged { get; set; }
-        public int LoanFormId { get; set; }
+        public Nullable<int> LoanFormId { get; set; }
         public int VerifyBy { get; set; }
         public string ReturnRemark { get; set; }
         public Nullable<int> ReturnBy { get; set; }

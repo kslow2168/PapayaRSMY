@@ -5,30 +5,31 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b3eb8aadffb6475abae92fcfb29e965d" Name="Diagram1" ZoomLevel="96">
-        <EntityTypeShape EntityType="PapayaDB.rs_accessories" Width="1.5" PointX="5.25" PointY="20.625" />
-        <EntityTypeShape EntityType="PapayaDB.rs_action" Width="1.5" PointX="13" PointY="1.625" />
-        <EntityTypeShape EntityType="PapayaDB.rs_assets" Width="1.5" PointX="3" PointY="3.875" />
-        <EntityTypeShape EntityType="PapayaDB.rs_assets_rel" Width="1.5" PointX="5.25" PointY="7" />
-        <EntityTypeShape EntityType="PapayaDB.rs_bookings" Width="1.5" PointX="8.25" PointY="6" />
-        <EntityTypeShape EntityType="PapayaDB.rs_bookstats" Width="1.5" PointX="5.25" PointY="10.25" />
-        <EntityTypeShape EntityType="PapayaDB.rs_company" Width="1.5" PointX="10.75" PointY="6.75" />
-        <EntityTypeShape EntityType="PapayaDB.rs_dates" Width="1.5" PointX="3" PointY="16" />
-        <EntityTypeShape EntityType="PapayaDB.rs_division" Width="1.5" PointX="0.75" PointY="3.875" />
-        <EntityTypeShape EntityType="PapayaDB.rs_loan_form" Width="1.5" PointX="6" PointY="1.25" />
-        <EntityTypeShape EntityType="PapayaDB.rs_locations" Width="1.5" PointX="0.75" PointY="8.25" />
-        <EntityTypeShape EntityType="PapayaDB.rs_module" Width="1.5" PointX="10.75" PointY="1" />
-        <EntityTypeShape EntityType="PapayaDB.rs_ownership" Width="1.5" PointX="0.75" PointY="11.75" />
-        <EntityTypeShape EntityType="PapayaDB.rs_smslogs" Width="1.5" PointX="3" PointY="26.125" />
-        <EntityTypeShape EntityType="PapayaDB.rs_syslog" Width="1.5" PointX="10.75" PointY="11.75" />
-        <EntityTypeShape EntityType="PapayaDB.rs_user" Width="1.5" PointX="0.75" PointY="14.25" />
-        <EntityTypeShape EntityType="PapayaDB.rs_user_group" Width="1.5" PointX="1.5" PointY="21.75" />
-        <EntityTypeShape EntityType="PapayaDB.rs_useracl" Width="1.5" PointX="15.25" PointY="11.625" />
+        <EntityTypeShape EntityType="PapayaDB.rs_accessories" Width="1.5" PointX="13.5" PointY="27.5" />
+        <EntityTypeShape EntityType="PapayaDB.rs_action" Width="1.5" PointX="0.75" PointY="9.875" />
+        <EntityTypeShape EntityType="PapayaDB.rs_assets" Width="1.5" PointX="11.25" PointY="10.75" />
+        <EntityTypeShape EntityType="PapayaDB.rs_assets_rel" Width="1.5" PointX="13.5" PointY="24.75" />
+        <EntityTypeShape EntityType="PapayaDB.rs_assetstatus" Width="1.5" PointX="9" PointY="18.75" />
+        <EntityTypeShape EntityType="PapayaDB.rs_bookings" Width="1.5" PointX="16.5" PointY="12.875" />
+        <EntityTypeShape EntityType="PapayaDB.rs_bookstats" Width="1.5" PointX="13.5" PointY="15.125" />
+        <EntityTypeShape EntityType="PapayaDB.rs_company" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PapayaDB.rs_dates" Width="1.5" PointX="11.25" PointY="6.875" />
+        <EntityTypeShape EntityType="PapayaDB.rs_division" Width="1.5" PointX="3.75" PointY="11.25" />
+        <EntityTypeShape EntityType="PapayaDB.rs_loan_form" Width="1.5" PointX="8.25" PointY="12.375" />
+        <EntityTypeShape EntityType="PapayaDB.rs_locations" Width="1.5" PointX="9" PointY="8.75" />
+        <EntityTypeShape EntityType="PapayaDB.rs_module" Width="1.5" PointX="1.5" PointY="4.25" />
+        <EntityTypeShape EntityType="PapayaDB.rs_ownership" Width="1.5" PointX="9" PointY="21.125" />
+        <EntityTypeShape EntityType="PapayaDB.rs_smslogs" Width="1.5" PointX="8.25" PointY="29.875" />
+        <EntityTypeShape EntityType="PapayaDB.rs_syslog" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PapayaDB.rs_user" Width="1.5" PointX="6" PointY="13.25" />
+        <EntityTypeShape EntityType="PapayaDB.rs_user_group" Width="1.5" PointX="0.75" PointY="14.875" />
+        <EntityTypeShape EntityType="PapayaDB.rs_useracl" Width="1.5" PointX="3" PointY="14.875" />
         <AssociationConnector Association="PapayaDB.FK_rs_accessories_rs_assets" />
         <AssociationConnector Association="PapayaDB.FK__rs_action__Modul__267ABA7A" />
         <AssociationConnector Association="PapayaDB.FK__se_userac__Actio__3C69FB99" />
         <AssociationConnector Association="PapayaDB.FK_AssetRelation_Asset" />
         <AssociationConnector Association="PapayaDB.FK_AssetRelation_System" />
-        <AssociationConnector Association="PapayaDB.FK_rs_assets_rs_assets" />
+        <AssociationConnector Association="PapayaDB.FK_rs_assets_rs_assetstatus" />
         <AssociationConnector Association="PapayaDB.FK_rs_assets_rs_division" />
         <AssociationConnector Association="PapayaDB.FK_rs_assets_rs_ownership" />
         <AssociationConnector Association="PapayaDB.FK_rs_assets_rs_user" />
@@ -45,6 +46,8 @@
         <AssociationConnector Association="PapayaDB.FK_se_bookings_se_user3" />
         <AssociationConnector Association="PapayaDB.FK_se_bookstats_se_dates" />
         <AssociationConnector Association="PapayaDB.FK_se_user_se_division" />
+        <AssociationConnector Association="PapayaDB.FK_rs_loan_form_rs_user" />
+        <AssociationConnector Association="PapayaDB.FK_rs_loan_form_rs_user1" />
         <AssociationConnector Association="PapayaDB.FK__rs_module__Paren__33D4B598" />
         <AssociationConnector Association="PapayaDB.FK_se_smslogs_se_user" />
         <AssociationConnector Association="PapayaDB.FK_se_user_se_user_group" />

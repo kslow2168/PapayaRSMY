@@ -312,7 +312,7 @@ namespace PapayaX2.Controllers
                 ViewBag.OwnerId = new SelectList(db.rs_user, "UserId", "Username");
                 ViewBag.DivId = new SelectList(db.rs_division, "DivId", "DivisionNo");
                 ViewBag.OwnerShipId = new SelectList(db.rs_ownership, "OwnerShipId", "OwnerType");
-
+                ViewBag.Availability = new SelectList(db.rs_assetstatus, "StatusId", "Status");
                 if (AclHelper.IsAdmin(User.Identity.Name))
                 {
                     ViewBag.SubAssetId = new SelectList(db.rs_assets.Where(x => x.IsSystem == false), "AssetId", "Model");
@@ -360,6 +360,19 @@ namespace PapayaX2.Controllers
                 ViewBag.OwnerId = new SelectList(db.rs_user, "UserId", "Username");
                 ViewBag.DivId = new SelectList(db.rs_division, "DivId", "DivisionNo");
                 ViewBag.OwnerShipId = new SelectList(db.rs_ownership, "OwnerShipId", "OwnerType");
+                ViewBag.Availability = new SelectList(db.rs_assetstatus, "StatusId", "Status");
+
+                if (AclHelper.IsAdmin(User.Identity.Name))
+                {
+                    ViewBag.SubAssetId = new SelectList(db.rs_assets.Where(x => x.IsSystem == false), "AssetId", "Model");
+
+                }
+                else
+                {
+                    ViewBag.SubAssetId = new SelectList(db.rs_assets.Where(x => x.IsSystem == false && x.OwnedBy == AclHelper.GetUserId(User.Identity.Name)), "AssetId", "Model");
+
+
+                }
                 SystemModel model = new SystemModel();
 
                 model.Step = 1;
@@ -391,6 +404,8 @@ namespace PapayaX2.Controllers
                     model.System.OwnedBy = model.OwnerId;
                     model.System.DivId = model.DivId;
                     model.System.OwnerShipId = model.OwnerShipId;
+                    model.System.Availability = model.Availability;
+                      ViewBag.Availability = new SelectList(db.rs_assetstatus, "StatusId", "Status");
 
                     string ownerShip = db.rs_ownership.Find(model.OwnerShipId).OwnerType;
                     int divNo = db.rs_division.Find(model.DivId).DivisionNo;
@@ -415,6 +430,7 @@ namespace PapayaX2.Controllers
                 ViewBag.OwnerId = new SelectList(db.rs_user, "UserId", "Username");
                 ViewBag.DivId = new SelectList(db.rs_division, "DivId", "DivisionNo");
                 ViewBag.OwnerShipId = new SelectList(db.rs_ownership, "OwnerShipId", "OwnerType");
+                ViewBag.Availability = new SelectList(db.rs_assetstatus, "StatusId", "Status");
 
                 return View("Assets", model);
             }
@@ -438,9 +454,16 @@ namespace PapayaX2.Controllers
                 {
                     return HttpNotFound();
                 }
+                SystemModel model = new SystemModel();
+
+                model.System = rs_assets;
                 ViewBag.OriginLocId = new SelectList(db.rs_locations, "LocationId", "LocationName", rs_assets.OriginLocId);
                 ViewBag.CurrentLocId = new SelectList(db.rs_locations, "LocationId", "LocationName", rs_assets.CurrentLocId);
-                return View(rs_assets);
+                ViewBag.OwnerId = new SelectList(db.rs_user, "UserId", "Username", rs_assets.OwnedBy);
+                ViewBag.DivId = new SelectList(db.rs_division, "DivId", "DivisionNo", rs_assets.DivId);
+                ViewBag.OwnerShipId = new SelectList(db.rs_ownership, "OwnerShipId", "OwnerType", rs_assets.OwnerShipId);
+                ViewBag.Availability = new SelectList(db.rs_assetstatus, "StatusId", "Status", rs_assets.Availability);
+                return View(model);
             }
             else
             {
@@ -453,19 +476,31 @@ namespace PapayaX2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AssetId,ParentId,Brand,Model,Desciption,SerialNumber,MaterialNo,HardwareOpt,SoftwareOpt,HardwareVer,SoftwareVer,LicenseExpiry,Accessories,Remarks,PurchaseDate,PurchasePrice,DecomDate,DecomReason,Tagged,Damaged,LastCalibrated,CalibrationCycle,CreatedDate,UpdatedDate,CreatedBy,OwnedBy,TrackingNo,ReadyToSell,Availability,OriginLocId,CurrentLocId,PurchasePO,DepreciationFormula,ImageLink,ViewedStats,BookingStats,FeaturedOrder,Featured,IsSystem")] rs_assets rs_assets)
+        public ActionResult Edit(SystemModel model)
         {
             if (AclHelper.hasAccess(User, currentAction, currentController))
             {
                 if (ModelState.IsValid)
                 {
-                    db.Entry(rs_assets).State = EntityState.Modified;
+
+                    model.System.UpdatedDate = DateTime.Now;
+                    model.System.CurrentLocId = model.CurrentLocId;
+                    model.System.OriginLocId = model.OriginLocId;
+                    model.System.OwnedBy = model.OwnerId;
+                    model.System.DivId = model.DivId;
+                    model.System.OwnerShipId = model.OwnerShipId;
+                    model.System.Availability = model.Availability;
+                    db.Entry(model.System).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                ViewBag.OriginLocId = new SelectList(db.rs_locations, "LocationId", "LocationName", rs_assets.OriginLocId);
-                ViewBag.CurrentLocId = new SelectList(db.rs_locations, "LocationId", "LocationName", rs_assets.CurrentLocId);
-                return View(rs_assets);
+                ViewBag.OriginLocId = new SelectList(db.rs_locations, "LocationId", "LocationName", model.System.OriginLocId);
+                ViewBag.CurrentLocId = new SelectList(db.rs_locations, "LocationId", "LocationName", model.System.CurrentLocId);
+                ViewBag.OwnerId = new SelectList(db.rs_user, "UserId", "Username", model.System.OwnedBy);
+                ViewBag.DivId = new SelectList(db.rs_division, "DivId", "DivisionNo", model.System.DivId);
+                ViewBag.OwnerShipId = new SelectList(db.rs_ownership, "OwnerShipId", "OwnerType", model.System.OwnerShipId);
+                ViewBag.Availability = new SelectList(db.rs_assetstatus, "StatusId", "Status", model.System.Availability);
+                return View(model);
             }
             else
             {
@@ -593,7 +628,7 @@ namespace PapayaX2.Controllers
                         rs_assets.OwnedBy = model.OwnerId;
                         rs_assets.DivId = model.DivId;
                         rs_assets.OwnerShipId = model.OwnerShipId;
-
+                        rs_assets.Availability = model.Availability;
                         string ownerShip = db.rs_ownership.Find(model.OwnerShipId).OwnerType;
                         int divNo = db.rs_division.Find(model.DivId).DivisionNo;
 

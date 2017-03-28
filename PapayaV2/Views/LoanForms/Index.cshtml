@@ -1,0 +1,76 @@
+﻿@model PapayaX2.Models.LoanFormSearchModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@if (TempData["Notification"] != null)
+{
+    @Html.Raw(TempData["Notification"].ToString());
+}
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+               Request No
+            </th>
+            <th>
+                Requestor
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+              End Date
+            </th>
+            <th>
+               Company
+            </th>
+            <th>
+                Contact
+            </th>
+            <th>
+              Created Date
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model.Loans) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rs_user1.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactPersion)
+            </td>
+           
+            <td>
+                @{ 
+                    string createdDate = item.CreatedDate.ToShortDateString();
+                }
+                @Html.DisplayFor(modelItem => createdDate)
+            </td>
+           
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.LoanId }) |
+                @Html.ActionLink("Print", "Printable", new { id=item.LoanId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.LoanId })
+            </td>
+        </tr>
+    }
+    
+    </table>
